@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Team – Anori Tech</title>
+  <meta name="description" content="Drei Gründer. Ganz viel Energie. Das Team hinter Anori Tech – Jan, Anina und Stefan.">
+  <!-- Security headers -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:;">
+  <meta name="referrer" content="no-referrer-when-downgrade">
+  <link rel="icon" type="image/svg+xml" href="Image-Assets/anori-circlebox-blue500.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="translations.js"></script>
+
+  <style>
+    /* ===== TEAM PAGE ===== */
+    body { background: var(--off-white); }
+
+    /* NAV: light background */
+    #hdr {
+      background: var(--off-white);
+      border-bottom: 1px solid rgba(0,0,41,.1);
+    }
+    #hdr.scrolled {
+      background: rgba(232,232,240,.95);
+      backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+      box-shadow: 0 4px 20px rgba(0,0,0,.08);
+    }
+    .burger-btn span { background: var(--blue); }
+    .burger-btn:hover { background: rgba(0,0,41,.06); }
+
+    /* ===== TEAM HERO SECTION ===== */
+    #team-page {
+      padding: 100px 0 80px;
+      background: var(--off-white);
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: .82rem; font-weight: 600; color: var(--muted);
+      transition: color var(--t); margin-bottom: 48px;
+    }
+    .back-link:hover { color: var(--blue); }
+    .back-link svg { transition: transform var(--t); }
+    .back-link:hover svg { transform: translateX(-3px); }
+
+    /* Eyebrow + headline */
+    .team-eyebrow { color: var(--muted); padding: 0; background: transparent; }
+
+    /* ===== TWO-COLUMN: story left, photo right ===== */
+    .team-top {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 72px; align-items: stretch;
+      margin-bottom: 80px;
+    }
+    .team-story-col h1 {
+      color: var(--blue); margin-bottom: 28px;
+      font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+    }
+    .team-story-col p {
+      color: var(--muted); font-size: .97rem; line-height: 1.8;
+      margin-bottom: 14px;
+    }
+    .team-story-col p:last-child { margin-bottom: 0; }
+
+    /* Photo column — height tracks the text column, not the image */
+    .team-photo-col { position: relative; min-height: 300px; }
+    .team-main-photo {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      border-radius: var(--radius-lg);
+      box-shadow: 0 16px 48px rgba(0,0,41,.15);
+      object-fit: cover; object-position: center top;
+      display: block;
+    }
+
+    /* ===== TEAM CARDS (circular photos) ===== */
+    .team-section-label {
+      text-align: center;
+      font-size: .72rem; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 40px;
+    }
+    .team-cards {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+    .team-card {
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center;
+    }
+
+    /* Circular avatar */
+    .team-avatar {
+      width: 160px; height: 160px;
+      border-radius: 50%; overflow: hidden;
+      margin-bottom: 20px;
+      box-shadow: 0 6px 24px rgba(0,0,41,.12);
+      flex-shrink: 0;
+    }
+    .team-avatar img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center center;
+    }
+
+    .team-card-name {
+      font-size: 1.1rem; font-weight: 700; color: var(--blue);
+      margin-bottom: 4px;
+    }
+    .team-card-role {
+      font-size: .82rem; color: var(--muted); font-weight: 500;
+      margin-bottom: 14px; line-height: 1.4; max-width: 180px;
+    }
+    .team-card-links {
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+    }
+    .linkedin-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: .8rem; font-weight: 600; color: var(--blue);
+      background: #fff; border: 1px solid rgba(0,0,41,.12);
+      padding: 6px 14px; border-radius: 8px;
+      transition: background var(--t), box-shadow var(--t);
+    }
+    .linkedin-btn:hover {
+      background: #f0f0f5; box-shadow: 0 3px 10px rgba(0,0,41,.1);
+    }
+    .team-card-email {
+      font-size: .78rem; color: var(--muted);
+      transition: color var(--t); word-break: break-all;
+    }
+    .team-card-email:hover { color: var(--blue); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 820px) {
+      .team-top { grid-template-columns: 1fr; gap: 40px; }
+      .team-photo-col { order: -1; }
+      .team-main-photo { max-height: 380px; object-fit: cover; }
+      .team-cards { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    }
+    @media (max-width: 520px) {
+      #team-page { padding: 88px 0 60px; }
+      .team-cards { grid-template-columns: 1fr; max-width: 300px; margin: 0 auto; }
+      .team-avatar { width: 140px; height: 140px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV BACKDROP -->
+<div class="nav-backdrop" id="nav-backdrop" onclick="closeNav()"></div>
+
+<!-- SLIDE MENU -->
+<nav id="nav-menu" aria-label="Hauptnavigation">
+  <a href="index.html" data-i18n="nav.home">Startseite</a>
+  <a href="team.html" aria-current="page" data-i18n="nav.team">Team</a>
+</nav>
+
+<!-- HEADER -->
+<header id="hdr">
+  <div class="container">
+    <div class="hdr-inner">
+      <a href="index.html" class="logo-wrap">
+        <img src="Image-Assets/anori-black.svg" alt="Anori Tech" class="logo-img">
+      </a>
+      <div class="hdr-right">
+        <a href="https://calendly.com/jan-mauch-anoritech/30min" target="_blank" rel="noopener noreferrer"
+           class="btn btn-orange btn-cta-nav" style="padding:10px 20px;font-size:.875rem">
+          <span data-i18n="nav.cta">Pilotkunde werden</span>
+        </a>
+        <button class="lang-btn" id="lang-btn" onclick="toggleLang()" aria-label="Switch to English">EN</button>
+        <button class="burger-btn" id="burger-btn" onclick="toggleNav()" aria-label="Menü öffnen" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ================================================================
+     TEAM PAGE
+================================================================ -->
+<main id="team-page">
+  <div class="container">
+
+    <a href="index.html" class="back-link fi">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span data-i18n="team.back">Zurück zur Startseite</span>
+    </a>
+
+    <!-- TWO-COLUMN: text + photo -->
+    <div class="team-top">
+
+      <!-- Left: story text -->
+      <div class="team-story-col">
+        <span class="eyebrow team-eyebrow fi" data-i18n="team.eyebrow">Das Team hinter Anori Tech</span>
+        <h1 class="fi fi-d1" data-i18n-html="team.h1">Drei Gründer.<br>Ganz viel Energie.</h1>
+        <p class="fi fi-d2" data-i18n="team.p1">
+          Ursprünglich wollten wir alle Autobatterien in Segelboote einbauen. Als wir auf der Suche nach einem passenden BMS waren, haben wir gemerkt, dass es kein passendes Produkt auf dem Markt gibt.
+        </p>
+        <p class="fi fi-d3" data-i18n="team.p2">
+          Nachdem wir mit etlichen Batterieherstellern gesprochen haben, ist uns aufgefallen, dass es anderen ähnlich geht. Dieses Problem wollen wir mit Anori Tech lösen.
+        </p>
+        <p class="fi fi-d4" data-i18n="team.p3">
+          Unser BMS ist modular aufgebaut, sodass wir schnell auf neue Batterie-Anwendungsfälle reagieren können.
+        </p>
+      </div>
+
+      <!-- Right: team photo -->
+      <div class="team-photo-col fi fi-d2">
+        <img src="Image-Assets/Team-Boot.png" alt="Das Team von Anori Tech" class="team-main-photo">
+      </div>
+
+    </div><!-- /team-top -->
+
+    <!-- TEAM CARDS -->
+    <p class="team-section-label fi" data-i18n="team.label">Die Gründer</p>
+
+    <div class="team-cards">
+
+      <!-- Jan Mauch -->
+      <div class="team-card fi fi-d1">
+        <div class="team-avatar avatar-jan">
+          <img src="Image-Assets/Jan-new.webp" alt="Jan Mauch">
+        </div>
+        <p class="team-card-name">Jan Mauch</p>
+        <p class="team-card-role" data-i18n="jan.role">Strategie &amp; Finanzen</p>
+        <div class="team-card-links">
+          <a href="https://www.linkedin.com/in/janmauch/" target="_blank" rel="noopener noreferrer" class="linkedin-btn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+            LinkedIn
+          </a>
+          <a href="mailto:jan.mauch@anoritech.com" class="team-card-email">jan.mauch@anoritech.com</a>
+        </div>
+      </div>
+
+      <!-- Anina Tietjens -->
+      <div class="team-card fi fi-d2">
+        <div class="team-avatar avatar-anina">
+          <img src="Image-Assets/Anina-new.webp" alt="Anina Tietjens">
+        </div>
+        <p class="team-card-name">Anina Tietjens</p>
+        <p class="team-card-role" data-i18n="anina.role">Operations &amp; Marketing</p>
+        <div class="team-card-links">
+          <a href="https://www.linkedin.com/in/anina-tietjens/" target="_blank" rel="noopener noreferrer" class="linkedin-btn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+            LinkedIn
+          </a>
+          <a href="mailto:anina.tietjens@anoritech.com" class="team-card-email">anina.tietjens@anoritech.com</a>
+        </div>
+      </div>
+
+      <!-- Stefan Akatyschew -->
+      <div class="team-card fi fi-d3">
+        <div class="team-avatar avatar-stefan">
+          <img src="Image-Assets/Stefan-new.webp" alt="Stefan Akatyschew">
+        </div>
+        <p class="team-card-name">Stefan Akatyschew</p>
+        <p class="team-card-role" data-i18n="stefan.role">Technische Produktentwicklung &amp; Sicherheit</p>
+        <div class="team-card-links">
+          <a href="https://www.linkedin.com/in/sakatyschew/" target="_blank" rel="noopener noreferrer" class="linkedin-btn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+            LinkedIn
+          </a>
+          <a href="mailto:stefan.akatyschew@anoritech.com" class="team-card-email">stefan.akatyschew@anoritech.com</a>
+        </div>
+      </div>
+
+    </div><!-- /team-cards -->
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-trust">
+    <div class="container">
+      <div class="ft-trust-pill">
+        <img src="Image-Assets/basti-logo-black.png" alt="TUM Venture Labs">
+        <span data-i18n="footer.trust">Unterstützt durch TUM Venture Labs</span>
+      </div>
+    </div>
+  </div>
+  <div class="ft-bar">
+    <div class="container">
+      <div class="ft-bar-inner">
+        <span class="ft-copy" data-i18n="footer.copy">© 2026 Anori Tech UG (haftungsbeschränkt). Alle Rechte vorbehalten.</span>
+        <nav class="ft-links" aria-label="Rechtliche Links">
+          <a href="index.html#" data-i18n="footer.impressum">Impressum</a>
+          <a href="index.html#" data-i18n="footer.datenschutz">Datenschutz</a>
+        </nav>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Fade-in on scroll
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+  }, { threshold: 0.07, rootMargin: '0px 0px -20px 0px' });
+  document.querySelectorAll('.fi').forEach(el => io.observe(el));
+
+  // Header scroll
+  const hdr = document.getElementById('hdr');
+  window.addEventListener('scroll', () => {
+    hdr.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+
+  // Nav menu
+  function toggleNav() {
+    const open = document.getElementById('nav-menu').classList.toggle('open');
+    document.getElementById('burger-btn').classList.toggle('open');
+    document.getElementById('nav-backdrop').classList.toggle('open');
+    document.getElementById('burger-btn').setAttribute('aria-expanded', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+  function closeNav() {
+    document.getElementById('nav-menu').classList.remove('open');
+    document.getElementById('burger-btn').classList.remove('open');
+    document.getElementById('nav-backdrop').classList.remove('open');
+    document.getElementById('burger-btn').setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeNav(); });
+
+  // Apply saved language on page load
+  if (typeof initLang === 'function') initLang();
+</script>
+</body>
+</html>
