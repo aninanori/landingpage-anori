@@ -257,7 +257,7 @@
     }
 
     /* ─── Metric cards: pull out of absolute overlay on single-column hero ─── */
-    @media (max-width: 720px) {
+    @media (min-width: 461px) and (max-width: 720px) {
       .hero-visual { padding-bottom: 0 !important; }
       .hero-metrics {
         position: static !important;
@@ -266,6 +266,16 @@
         gap: 8px;
       }
       .metric-card { padding: 12px 8px; }
+    }
+    /* ─── Tiny phones (≤460px): single column, full width ─── */
+    @media (max-width: 460px) {
+      .hero-visual { padding-bottom: 0 !important; }
+      .hero-metrics {
+        position: static !important;
+        margin-top: 16px;
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
     }
 
     /* ─── Mobile: fix button width + hero spacing ─── */
