@@ -276,6 +276,13 @@
         grid-template-columns: 1fr;
         gap: 8px;
       }
+      /* Metric cards: horizontal row layout (icon left, text right) */
+      .metric-card {
+        display: flex; align-items: center;
+        gap: 12px; text-align: left; padding: 12px 14px;
+      }
+      .metric-icon { margin: 0; flex-shrink: 0; }
+      .metric-num { font-size: 1rem; }
     }
 
     /* ─── Mobile: fix button width + hero spacing ─── */
