@@ -48,7 +48,7 @@
       'tile3.h3':    'Zertifizierungen',
       'tile3.p':     'Wir analysieren Ihren individuellen Anwendungsfall und stellen sicher, dass Ihr BMS alle notwendigen Regularien und Vorschriften einhält. Bei Fragen oder Sonderwünschen stehen wir jederzeit zur Verfügung.',
       'tile4.h3':    'Dateneinsicht mit Anori Cloud',
-      'tile4.p':     'Wir analysieren Ihren individuellen Anwendungsfall und stellen sicher, dass Ihr BMS alle notwendigen Regularien und Vorschriften einhält. Bei Fragen oder Sonderwünschen stehen wir jederzeit zur Verfügung.',
+      'tile4.p':     'Keine Lust mehr auf Emails, Telefonate und Meetings, um den aktuellen Entwicklungsstand Ihres BMS zu erfahren? Mit der Anori Cloud versetzen wir Sie in die Lage jederzeit den aktuellen Entwicklungsstand Ihres BMS einzusehen. Wir zeigen Ihnen transparent Projektmeilensteine, offene To Dos, den aktuellen Zertifizierungsstand und vieles mehr. Bleiben Sie von der ersten Anforderungsanalyse bis zur Serienfertigung und Versand mit Anori Cloud immer auf dem aktuellen Stand.',
 
       /* Pilot */
       'pilot.eyebrow': 'Pilot Projekt',
@@ -133,7 +133,7 @@
       'tile3.h3':    'Certifications',
       'tile3.p':     'We analyze your individual use case and ensure your BMS complies with all necessary regulations and standards. We\'re available at any time for questions or special requests.',
       'tile4.h3':    'Data Insights with Anori Cloud',
-      'tile4.p':     'We analyze your individual use case and ensure your BMS complies with all necessary regulations and standards. We\'re available at any time for questions or special requests.',
+      'tile4.p':     'Tired of emails, phone calls, and meetings just to get an update on your BMS development status? With Anori Cloud, we give you real-time access to the current development progress of your BMS at any time. We transparently show you project milestones, open to-dos, the current certification status, and much more. Stay fully up to date — from the first requirements analysis all the way through to series production and delivery.',
 
       /* Pilot */
       'pilot.eyebrow': 'Pilot Program',
