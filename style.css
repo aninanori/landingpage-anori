@@ -1,6 +1,6 @@
 /* ============================================================
-   ANORI TECH – Shared Stylesheet
-   Colors: Orange #FFBE00 | Blue #000029 | Hellblau #D4E4DD | Weiß #E8E8F0
+   ANORI TECH â€“ Shared Stylesheet
+   Colors: Orange #FFBE00 | Blue #000029 | Hellblau #D4E4DD | WeiÃŸ #E8E8F0
    ============================================================ */
 
 /* TOKENS */
@@ -209,7 +209,7 @@ body:not(#index) .lang-btn {
 
 /* ========================== RESPONSIVE ========================== */
 
-/* ─── Tablet landscape + large tablet (≤ 1024px) ─── */
+/* â”€â”€â”€ Tablet landscape + large tablet (â‰¤ 1024px) â”€â”€â”€ */
 @media (max-width: 1024px) {
   /* Problem: quote stacks below bullets */
   .prob-cols { grid-template-columns: 1fr; }
@@ -217,7 +217,7 @@ body:not(#index) .lang-btn {
   .pilot-cols { grid-template-columns: 1fr; }
 }
 
-/* ─── Solution tiles + smaller tablet (≤ 880px) ─── */
+/* â”€â”€â”€ Solution tiles + smaller tablet (â‰¤ 880px) â”€â”€â”€ */
 @media (max-width: 880px) {
   .sol-tiles { flex-direction: column; min-height: auto; }
   .sol-tile { flex: none !important; min-height: 220px; }
@@ -233,20 +233,23 @@ body:not(#index) .lang-btn {
   #problem, #solution, #pilot, #cta { padding-top: 72px; padding-bottom: 72px; }
 }
 
-/* ─── Mobile (≤ 720px) ─── */
+/* â”€â”€â”€ Mobile (â‰¤ 720px) â”€â”€â”€ */
 @media (max-width: 720px) {
   /* Hero: single column, TEXT FIRST then image below */
   .hero-grid { grid-template-columns: 1fr !important; gap: 36px !important; }
-  /* No order reversal — text stays on top naturally */
+  /* No order reversal â€” text stays on top naturally */
   .hero-metrics { gap: 6px; }
   .metric-num { font-size: 1.05rem; }
   .metric-label { font-size: .58rem; }
 
   /* Reduce hero vertical padding on mobile */
   #hero { padding-top: 96px !important; padding-bottom: 64px !important; }
+
+  /* Hide nav CTA button on all portrait phones */
+  .btn-cta-nav { display: none !important; }
 }
 
-/* ─── Small mobile (≤ 600px) ─── */
+/* â”€â”€â”€ Small mobile (â‰¤ 600px) â”€â”€â”€ */
 @media (max-width: 600px) {
   .container { padding: 0 16px; }
   .hdr-inner { height: 68px; }
@@ -254,14 +257,13 @@ body:not(#index) .lang-btn {
   .btn { padding: 13px 20px; font-size: .9rem; }
   .ft-bar-inner { flex-direction: column; text-align: center; }
   .ft-links { justify-content: center; }
-  .btn-cta-nav { display: none !important; }
   .prob-image-band { height: 180px; }
 
   /* Tighten section padding on phones */
   #problem, #solution, #pilot, #cta { padding-top: 56px; padding-bottom: 56px; }
 }
 
-/* ─── Extra-small phones (≤ 460px) ─── */
+/* â”€â”€â”€ Extra-small phones (â‰¤ 460px) â”€â”€â”€ */
 @media (max-width: 460px) {
   /* Metric cards: go to static flow so they don't overlap image */
   .hero-visual { padding-bottom: 0 !important; }
@@ -280,7 +282,7 @@ body:not(#index) .lang-btn {
   .metric-num { font-size: 1rem; }
 }
 
-/* ─── Touch devices: solution tiles always expanded ─── */
+/* â”€â”€â”€ Touch devices: solution tiles always expanded â”€â”€â”€ */
 @media (hover: none) {
   .sol-tiles { flex-direction: column !important; min-height: auto !important; }
   .sol-tile { flex: none !important; width: 100% !important; min-height: 200px; }
