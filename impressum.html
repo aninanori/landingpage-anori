@@ -95,6 +95,10 @@
       margin: 32px 0;
     }
 
+    /* Links inside legal content */
+    .legal-card a { color: var(--blue); text-decoration: underline; text-underline-offset: 2px; }
+    .legal-card a:hover { opacity: .7; }
+
     @media (max-width: 720px) {
       #legal-page { padding: 88px 0 72px; }
       .legal-card { padding: 32px 24px; }
@@ -150,40 +154,20 @@
       <span class="legal-eyebrow" data-i18n="footer.impressum">Impressum</span>
       <h1 data-i18n="modal.impressum.title">Impressum</h1>
 
-      <h4>Angaben gemäß § 5 TMG</h4>
-      <p>Anori Tech UG (haftungsbeschränkt)</p>
-
-      <hr class="legal-divider">
-
-      <h4 data-i18n="imp.head.director">Geschäftsführer</h4>
-      <p>Jan Mauch</p>
-
-      <hr class="legal-divider">
-
-      <h4 data-i18n="imp.head.address">Anschrift</h4>
-      <p>Thadenstraße 160 b<br>22767 Hamburg, Germany</p>
-
-      <hr class="legal-divider">
-
-      <h4 data-i18n="imp.head.contact">Kontakt</h4>
-      <p>
-        Telefon: <a href="tel:+4915167011710">+49 151 67011710</a><br>
-        E-Mail: <a href="mailto:team@anoritech.com">team@anoritech.com</a><br>
-        Website: <a href="https://anoritech.com">anoritech.com</a>
-      </p>
-
-      <hr class="legal-divider">
-
-      <h4 data-i18n="imp.head.register">Registereintrag</h4>
-      <p>
-        Registergericht: Amtsgericht Hamburg<br>
-        Registernummer: HRB 195802
-      </p>
-
-      <hr class="legal-divider">
-
-      <h4 data-i18n="imp.head.vat">Umsatzsteuer-ID</h4>
-      <p>USt-IdNr. gemäß § 27 a UStG: DE459830158</p>
+      <div data-i18n-html="modal.impressum.body">
+        <h4>Angaben gemäß § 5 TMG</h4><p>Anori Tech UG (haftungsbeschränkt)</p>
+        <hr class="legal-divider">
+        <h4>Geschäftsführer</h4><p>Jan Mauch</p>
+        <hr class="legal-divider">
+        <h4>Anschrift</h4><p>Thadenstraße 160 b<br>22767 Hamburg, Germany</p>
+        <hr class="legal-divider">
+        <h4>Kontakt</h4>
+        <p>Telefon: <a href="tel:+4915167011710">+49 151 67011710</a><br>E-Mail: <a href="mailto:team@anoritech.com">team@anoritech.com</a><br>Website: <a href="https://anoritech.com">anoritech.com</a></p>
+        <hr class="legal-divider">
+        <h4>Registereintrag</h4><p>Registergericht: Amtsgericht Hamburg<br>Registernummer: HRB 195802</p>
+        <hr class="legal-divider">
+        <h4>Umsatzsteuer-ID</h4><p>USt-IdNr. gemäß § 27 a UStG: DE459830158</p>
+      </div>
     </div>
 
   </div>
