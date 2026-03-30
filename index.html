@@ -668,67 +668,13 @@
       <div class="ft-bar-inner">
         <span class="ft-copy" data-i18n="footer.copy">© 2026 Anori Tech UG (haftungsbeschränkt). Alle Rechte vorbehalten.</span>
         <nav class="ft-links" aria-label="Rechtliche Links">
-          <a href="#" onclick="openModal('impressum');return false;" data-i18n="footer.impressum">Impressum</a>
-          <a href="#" onclick="openModal('datenschutz');return false;" data-i18n="footer.datenschutz">Datenschutz</a>
+          <a href="impressum.html" data-i18n="footer.impressum">Impressum</a>
+          <a href="datenschutz.html" data-i18n="footer.datenschutz">Datenschutz</a>
         </nav>
       </div>
     </div>
   </div>
 </footer>
-
-<!-- MODAL – IMPRESSUM -->
-<div class="overlay" id="modal-impressum" role="dialog" aria-modal="true" aria-labelledby="imp-title">
-  <div class="modal">
-    <div class="modal-hd">
-      <h3 id="imp-title" data-i18n="modal.impressum.title">Impressum</h3>
-      <button class="modal-x" onclick="closeModal('impressum')" aria-label="Schließen">✕</button>
-    </div>
-    <div class="modal-bd" data-i18n-html="modal.impressum.body">
-      <h4>Angaben gemäß § 5 TMG</h4><p>Anori Tech UG (haftungsbeschränkt)</p>
-      <h4>Geschäftsführer</h4><p>Jan Mauch</p>
-      <h4>Anschrift</h4><p>Thadenstraße 160 b<br>22767 Hamburg, Germany</p>
-      <h4>Kontakt</h4><p>Telefon: +49 151 67011710<br>E-Mail: team@anoritech.com<br>Website: anoritech.com</p>
-      <h4>Registereintrag</h4><p>Registergericht: Amtsgericht Hamburg<br>Registernummer: HRB 195802</p>
-      <h4>Umsatzsteuer-ID</h4><p>USt-IdNr. gemäß § 27 a UStG: DE459830158</p>
-    </div>
-  </div>
-</div>
-
-<!-- MODAL – DATENSCHUTZ -->
-<div class="overlay" id="modal-datenschutz" role="dialog" aria-modal="true" aria-labelledby="dsg-title">
-  <div class="modal">
-    <div class="modal-hd">
-      <h3 id="dsg-title" data-i18n="modal.datenschutz.title">Datenschutzerklärung</h3>
-      <button class="modal-x" onclick="closeModal('datenschutz')" aria-label="Schließen">✕</button>
-    </div>
-    <div class="modal-bd" data-i18n-html="modal.datenschutz.body">
-      <p>Vielen Dank für Ihr Interesse an unserer Website. Nachfolgend informieren wir Sie darüber, welche Daten wir erheben, wie wir sie verwenden und welche Rechte Sie haben.</p>
-      <h4>1. Verantwortliche Stelle</h4>
-      <p>Jan Mauch<br>Thadenstraße 160 b<br>22767 Hamburg, Germany<br>Telefon: +49 151 67011710<br>E-Mail: team@anoritech.com</p>
-      <h4>2. Erhebung und Speicherung personenbezogener Daten</h4>
-      <p>Wenn Sie uns eine E-Mail schreiben, verarbeiten wir folgende Daten:</p>
-      <ul><li>E-Mail-Adresse</li><li>Name</li><li>Datum und Uhrzeit der Eingabe</li></ul>
-      <h4>3. Zweck der Verarbeitung</h4>
-      <ul><li>Kontaktaufnahme zu Beginn eines Projekts oder Launches</li><li>Bereitstellung von Informationen über Neuigkeiten zu unserem Angebot</li><li>Analyse des Interesses an unserem Projekt</li></ul>
-      <h4>4. Rechtsgrundlage</h4>
-      <p>Ihre Daten werden auf Basis Ihrer Einwilligung gemäß Art. 6 Abs. 1 lit. a DSGVO verarbeitet. Sie können Ihre Einwilligung jederzeit widerrufen, z.&nbsp;B. per E-Mail an team@anoritech.com.</p>
-      <h4>5. Speicherdauer</h4>
-      <p>Ihre Daten werden nur so lange gespeichert, wie es für die genannten Zwecke erforderlich ist oder bis Sie Ihre Einwilligung widerrufen.</p>
-      <h4>6. Weitergabe an Dritte</h4>
-      <p>Wir geben Ihre personenbezogenen Daten nicht an Dritte weiter, es sei denn, dies ist gesetzlich vorgeschrieben oder für die Vertragserfüllung notwendig.</p>
-      <h4>7. Ihre Rechte</h4>
-      <ul>
-        <li>Auskunft über Ihre gespeicherten Daten (Art. 15 DSGVO)</li>
-        <li>Berichtigung unrichtiger Daten (Art. 16 DSGVO)</li>
-        <li>Löschung Ihrer Daten (Art. 17 DSGVO)</li>
-        <li>Einschränkung der Verarbeitung (Art. 18 DSGVO)</li>
-        <li>Datenübertragbarkeit (Art. 20 DSGVO)</li>
-        <li>Widerspruch gegen die Verarbeitung (Art. 21 DSGVO)</li>
-      </ul>
-      <p>Zur Ausübung Ihrer Rechte: team@anoritech.com</p>
-    </div>
-  </div>
-</div>
 
 <!-- ================================================================
      JAVASCRIPT
@@ -782,27 +728,7 @@
     document.body.style.overflow = '';
   }
 
-  // Modals — only allow known modal names to prevent unexpected DOM access
-  const ALLOWED_MODALS = ['impressum', 'datenschutz'];
-  function openModal(name) {
-    if (!ALLOWED_MODALS.includes(name)) return;
-    document.getElementById('modal-' + name).classList.add('on');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeModal(name) {
-    if (!ALLOWED_MODALS.includes(name)) return;
-    document.getElementById('modal-' + name).classList.remove('on');
-    document.body.style.overflow = '';
-  }
-  document.querySelectorAll('.overlay').forEach(ov => {
-    ov.addEventListener('click', e => { if (e.target === ov) { ov.classList.remove('on'); document.body.style.overflow = ''; } });
-  });
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') {
-      closeNav();
-      document.querySelectorAll('.overlay.on').forEach(ov => { ov.classList.remove('on'); document.body.style.overflow = ''; });
-    }
-  });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeNav(); });
 
   // Apply saved language on page load
   if (typeof initLang === 'function') initLang();
