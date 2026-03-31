@@ -108,6 +108,47 @@
       #legal-page { padding: 88px 0 72px; }
       .legal-card { padding: 32px 24px; }
     }
+
+    /* ===================================================
+       EDGE DESIGN OVERRIDES
+    =================================================== */
+    :root {
+      --radius: 0px;
+      --radius-lg: 0px;
+    }
+
+    /* All buttons square */
+    .btn { border-radius: 0 !important; }
+    .lang-btn { border-radius: 0 !important; }
+
+    /* Orange button: black border, no shadow */
+    .btn-orange {
+      border: 2px solid #000 !important;
+      box-shadow: none !important;
+    }
+    .btn-orange:hover {
+      box-shadow: none !important;
+      transform: none !important;
+    }
+
+    /* Legal card: square, black border, no shadow */
+    .legal-card {
+      border-radius: 0 !important;
+      border: 2px solid #000 !important;
+      box-shadow: none !important;
+    }
+
+    /* Footer trust pill: no border */
+    .ft-trust-pill {
+      border-radius: 0 !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
+
+    /* Header scrolled: no shadow */
+    #hdr.scrolled {
+      box-shadow: none !important;
+    }
   </style>
 </head>
 <body>
@@ -129,7 +170,7 @@
         <img src="Image-Assets/anori-black.svg" alt="Anori Tech" class="logo-img">
       </a>
       <div class="hdr-right">
-        <a href="https://calendly.com/jan-mauch-anoritech/30min" target="_blank" rel="noopener noreferrer"
+        <a href="https://outlook.office.com/book/AnoriTech@anoritech.com/?ismsaljsauthenabled" target="_blank" rel="noopener noreferrer"
            class="btn btn-orange btn-cta-nav" style="padding:10px 20px;font-size:.875rem">
           <span data-i18n="nav.cta">Pilotkunde werden</span>
         </a>
@@ -206,7 +247,7 @@
   <div class="ft-trust">
     <div class="container">
       <div class="ft-trust-pill">
-        <img src="Image-Assets/basti-logo-black.png" alt="TUM Venture Labs">
+        <img src="Image-Assets/TUM-Venture-Lab-logo.png" alt="TUM Venture Labs">
         <span data-i18n="footer.trust">Unterstützt durch TUM Venture Labs</span>
       </div>
     </div>
