@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Team – Anori Tech</title>
+  <title>Team – Anori Tech · TEAM EDGE PREVIEW (eckiges Design)</title>
   <meta name="description" content="Drei Gründer. Ganz viel Energie. Das Team hinter Anori Tech – Jan, Anina und Stefan.">
   <!-- Security headers -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:;">
@@ -147,6 +147,59 @@
       .team-cards { grid-template-columns: 1fr; max-width: 300px; margin: 0 auto; }
       .team-avatar { width: 140px; height: 140px; }
     }
+
+    /* ===================================================
+       EDGE DESIGN OVERRIDES
+    =================================================== */
+    :root {
+      --radius: 0px;
+      --radius-lg: 0px;
+    }
+
+    /* All buttons square */
+    .btn { border-radius: 0 !important; }
+    .lang-btn { border-radius: 0 !important; }
+    .linkedin-btn { border-radius: 0 !important; box-shadow: none !important; }
+    .linkedin-btn:hover { box-shadow: none !important; }
+
+    /* Orange buttons: black border, no shadow */
+    .btn-orange {
+      border: 2px solid #000 !important;
+      box-shadow: none !important;
+    }
+    .btn-orange:hover {
+      box-shadow: none !important;
+      transform: none !important;
+    }
+
+    /* Eyebrow pill: square */
+    .eyebrow { border-radius: 0 !important; }
+
+    /* Team avatar: square with thick black border, no shadow */
+    .team-avatar {
+      border-radius: 0 !important;
+      border: 4px solid #000 !important;
+      box-shadow: none !important;
+    }
+
+    /* Main team photo: square, black border, no shadow */
+    .team-main-photo {
+      border-radius: 0 !important;
+      border: 2px solid #000 !important;
+      box-shadow: none !important;
+    }
+
+    /* Footer trust pill: no border */
+    .ft-trust-pill {
+      border-radius: 0 !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
+
+    /* Header scrolled: no shadow */
+    #hdr.scrolled {
+      box-shadow: none !important;
+    }
   </style>
 </head>
 <body>
@@ -168,7 +221,7 @@
         <img src="Image-Assets/anori-black.svg" alt="Anori Tech" class="logo-img">
       </a>
       <div class="hdr-right">
-        <a href="https://calendly.com/jan-mauch-anoritech/30min" target="_blank" rel="noopener noreferrer"
+        <a href="https://outlook.office.com/book/AnoriTech@anoritech.com/?ismsaljsauthenabled" target="_blank" rel="noopener noreferrer"
            class="btn btn-orange btn-cta-nav" style="padding:10px 20px;font-size:.875rem">
           <span data-i18n="nav.cta">Pilotkunde werden</span>
         </a>
@@ -287,7 +340,7 @@
   <div class="ft-trust">
     <div class="container">
       <div class="ft-trust-pill">
-        <img src="Image-Assets/basti-logo-black.png" alt="TUM Venture Labs">
+        <img src="Image-Assets/TUM-Venture-Lab-logo.png" alt="TUM Venture Labs">
         <span data-i18n="footer.trust">Unterstützt durch TUM Venture Labs</span>
       </div>
     </div>
