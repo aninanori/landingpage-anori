@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Anori Tech – Schneller vom Konzept zum fertigen BMS</title>
+  <title>Anori Tech – EDGE2 PREVIEW (kein Schatten)</title>
   <meta name="description" content="Die schnellste und günstigste BMS-Entwicklung für innovative Batteriehersteller. Konfigurierbar, zertifizierbar, lieferbar.">
   <!-- Security headers -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:;">
@@ -293,6 +293,94 @@
       /* Tighten pilot sub-heading spacing */
       .pilot-sub { margin-bottom: 32px; }
     }
+
+    /* ================================================================
+       EDGE DESIGN OVERRIDES — alle Radii entfernen, schwarze Rahmen
+    ================================================================ */
+
+    /* 1. CSS-Variablen auf 0 setzen — trifft alle var(--radius) Stellen */
+    :root {
+      --radius:    0px;
+      --radius-lg: 0px;
+    }
+
+    /* 2. Alle Buttons eckig + schwarzer Rahmen bei Orange-Buttons */
+    .btn { border-radius: 0 !important; }
+    .btn-orange {
+      border: 2px solid #000 !important;
+      box-shadow: none !important;
+    }
+    .btn-orange:hover {
+      box-shadow: none !important;
+      transform: translateY(-2px) !important;
+    }
+    .btn-outline-white { border-radius: 0 !important; }
+    .btn-white {
+      border-radius: 0 !important;
+      border: 2px solid rgba(255,255,255,.6) !important;
+    }
+
+    /* 3. Eyebrow-Pill eckig */
+    .eyebrow { border-radius: 0 !important; }
+
+    /* 4. Lang-Button eckig */
+    .lang-btn { border-radius: 0 !important; }
+
+    /* 5. Metric Cards — eckig + schwarzer Rahmen */
+    .metric-card {
+      border-radius: 0 !important;
+      border: 1.5px solid #000 !important;
+      box-shadow: none !important;
+    }
+    .metric-icon { border-radius: 0 !important; }
+
+    /* 6. Hero Bild-Rahmen eckig */
+    .hero-img-wrap {
+      border-radius: 0 !important;
+      border: 2px solid #000 !important;
+      box-shadow: none !important;
+    }
+
+    /* 7. Problem-Sektion */
+    .prob-image-band { border-radius: 0 !important; }
+    .prob-quote {
+      border-radius: 0 !important;
+      border: 1.5px solid rgba(212,228,221,.4) !important;
+    }
+    .prob-callout {
+      border-radius: 0 !important;
+      border: 1px solid rgba(255,190,0,.25) !important;
+      border-left: 3px solid var(--orange) !important;
+    }
+    /* Orange Kreis-Bullets → quadratisch */
+    .prob-arrow-circle { border-radius: 0 !important; }
+
+    /* 8. Solution Tiles eckig */
+    .sol-tile { border-radius: 0 !important; }
+
+    /* 9. CTA Box eckig + schwarzer Rahmen */
+    .cta-box {
+      border-radius: 0 !important;
+      border: 2px solid rgba(255,255,255,.25) !important;
+    }
+    /* CTA Badge eckig */
+    .cta-badge {
+      border-radius: 0 !important;
+    }
+    .cta-badge::before { border-radius: 0 !important; }
+
+    /* 10. Footer Trust Pill — kein Rahmen */
+    .ft-trust-pill {
+      border-radius: 0 !important;
+      border: none !important;
+    }
+
+    /* 11. Kleine Puls-Punkte (Hero-Note + CTA-Badge) → eckig */
+    .hero-note::before { border-radius: 0 !important; }
+    .cta-badge::before { border-radius: 0 !important; }
+
+    /* 12. Metric-Icon Hintergrund → eckig (hardcoded 8px in inline style) */
+    .metric-icon { border-radius: 0 !important; }
   </style>
 </head>
 <body>
@@ -315,7 +403,7 @@
         <img src="Image-Assets/anori-white.svg" alt="Anori Tech" class="logo-img logo-white">
       </a>
       <div class="hdr-right">
-        <a href="https://calendly.com/jan-mauch-anoritech/30min" target="_blank" rel="noopener noreferrer"
+        <a href="https://outlook.office.com/book/AnoriTech@anoritech.com/?ismsaljsauthenabled" target="_blank" rel="noopener noreferrer"
            class="btn btn-orange btn-cta-nav" style="padding:10px 20px;font-size:.875rem">
           <span data-i18n="nav.cta">Pilotkunde werden</span>
         </a>
@@ -347,13 +435,13 @@
         </div>
 
         <div class="hero-btns fi fi-d2">
-          <a href="https://calendly.com/jan-mauch-anoritech/30min" target="_blank" rel="noopener noreferrer" class="btn btn-orange">
+          <a href="https://outlook.office.com/book/AnoriTech@anoritech.com/?ismsaljsauthenabled" target="_blank" rel="noopener noreferrer" class="btn btn-orange">
             <span data-i18n="hero.btn.pilot">Pilotkunde werden</span>
             <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
               <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </a>
-          <a href="https://calendly.com/jan-mauch-anoritech/30min" target="_blank" rel="noopener noreferrer" class="btn btn-outline-dark">
+          <a href="https://outlook.office.com/book/AnoriTech@anoritech.com/?ismsaljsauthenabled" target="_blank" rel="noopener noreferrer" class="btn btn-outline-dark">
             <span data-i18n="hero.btn.talk">Gespräch vereinbaren</span>
           </a>
         </div>
@@ -447,7 +535,7 @@
         <div class="prob-callout">
           <span class="prob-callout-icon">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <circle cx="10" cy="10" r="8.5" stroke="#FFBE00" stroke-width="1.5"/>
+              <rect x="1.5" y="1.5" width="17" height="17" stroke="#FFBE00" stroke-width="1.5"/>
               <path d="M10 6.5v4M10 13.5h.01" stroke="#FFBE00" stroke-width="1.8" stroke-linecap="round"/>
             </svg>
           </span>
@@ -547,7 +635,7 @@
           <li>
             <span class="pilot-icon">
               <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                <circle cx="9" cy="9" r="8" stroke="#FFBE00" stroke-width="1.4"/>
+                <rect x="1" y="1" width="16" height="16" stroke="#FFBE00" stroke-width="1.4"/>
                 <path d="M5.5 9l2.5 2.5 4.5-4.5" stroke="#FFBE00" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </span>
@@ -556,7 +644,7 @@
           <li>
             <span class="pilot-icon">
               <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                <circle cx="9" cy="9" r="8" stroke="#FFBE00" stroke-width="1.4"/>
+                <rect x="1" y="1" width="16" height="16" stroke="#FFBE00" stroke-width="1.4"/>
                 <path d="M5.5 9l2.5 2.5 4.5-4.5" stroke="#FFBE00" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </span>
@@ -565,7 +653,7 @@
           <li>
             <span class="pilot-icon">
               <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                <circle cx="9" cy="9" r="8" stroke="#FFBE00" stroke-width="1.4"/>
+                <rect x="1" y="1" width="16" height="16" stroke="#FFBE00" stroke-width="1.4"/>
                 <path d="M5.5 9l2.5 2.5 4.5-4.5" stroke="#FFBE00" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </span>
@@ -574,7 +662,7 @@
           <li>
             <span class="pilot-icon">
               <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                <circle cx="9" cy="9" r="8" stroke="#FFBE00" stroke-width="1.4"/>
+                <rect x="1" y="1" width="16" height="16" stroke="#FFBE00" stroke-width="1.4"/>
                 <path d="M5.5 9l2.5 2.5 4.5-4.5" stroke="#FFBE00" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </span>
@@ -637,7 +725,7 @@
       <p class="cta-sub" data-i18n="cta.sub">
         15 Minuten Gespräch. Wir sagen Ihnen ehrlich, ob eine Zusammenarbeit für Sie Sinn ergibt.
       </p>
-      <a href="https://calendly.com/jan-mauch-anoritech/30min" target="_blank" rel="noopener noreferrer" class="btn btn-orange">
+      <a href="https://outlook.office.com/book/AnoriTech@anoritech.com/?ismsaljsauthenabled" target="_blank" rel="noopener noreferrer" class="btn btn-orange">
         <span data-i18n="cta.btn">Pilotkunde werden</span>
         <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
           <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -658,7 +746,7 @@
   <div class="ft-trust">
     <div class="container">
       <div class="ft-trust-pill">
-        <img src="Image-Assets/basti-logo-black.png" alt="TUM Venture Labs">
+        <img src="Image-Assets/TUM-Venture-Lab-logo.png" alt="TUM Venture Labs">
         <span data-i18n="footer.trust">Unterstützt durch TUM Venture Labs</span>
       </div>
     </div>
