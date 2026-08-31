@@ -1,0 +1,276 @@
+/* ============================================================
+   ANORI TECH – Site Chrome (V3)
+   Einzige Quelle fuer Header, Burger-Menu, Slide-in-Navigation
+   und Footer. Wird von JEDER Seite geladen (direkt oder ueber
+   anori.css, das diese Datei per @import einbindet), damit
+   Header/Menu/Footer auf allen Seiten immer identisch sind.
+   Aenderungen HIER wirken sofort auf alle Seiten.
+   Verhalten (Scroll, Burger-Toggle, Sprache, FAQ) steckt in
+   assets/anori.js, ebenfalls von jeder Seite geladen.
+   ============================================================ */
+
+/* ---------- Design-Tokens, die Header/Menue/Footer brauchen ----------
+   Diese Datei muss auf JEDER Seite fuer sich alleine richtig aussehen,
+   auch auf Seiten, die anori.css nicht laden (z. B. home-circuit8.html,
+   siehe Kommentar oben). Deshalb stehen die Variablen, die die Regeln
+   unten benutzen, HIER und nicht nur in anori.css. Fehlt zum Beispiel
+   --offwhite auf einer Seite, wird Menu-/Footer-Text unsichtbar (navy
+   auf navy) - genau dieser Bug ist der Grund fuer diesen Block. */
+:root {
+  --navy:     #000029;
+  --orange:   #FFBE00;
+  --offwhite: #E8E8F0;
+  --navy-20:  rgba(0,0,41,.20);
+  --hdr-h:    80px;
+  --t:        .25s ease;
+}
+
+/* Verhindert minimales horizontales Scrollen auf Seiten, die diese Datei
+   ohne anori.css laden (z. B. index.html) - die Slide-in-Navigation steht
+   sonst leicht ausserhalb des Viewports und macht die Seite horizontal
+   scrollbar. anori.css hat dieselbe Regel bereits in seinem Reset. */
+html, body { overflow-x: hidden; }
+
+/* Kopf- und Fusszeile sind auf jeder Seite exakt gleich breit, egal was
+   die jeweilige Seite fuer ihr eigenes .wrap definiert (home-circuit8.html
+   nutzt fuer den restlichen Seiteninhalt z. B. ein breiteres .wrap als
+   anori.css). Die ID- bzw. Doppel-Klassen-Selektoren hier gewinnen immer
+   gegen ein einfaches .wrap, unabhaengig von der Ladereihenfolge. */
+#hdr .wrap, footer.site .wrap {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 28px;
+}
+@media (max-width: 860px) {
+  #hdr .wrap, footer.site .wrap { padding: 0 20px; }
+}
+
+/* ---------- Skip-Link (Barrierefreiheit) ---------- */
+.skip-link {
+  position: absolute; left: -9999px; top: 0; z-index: 999;
+  background: var(--orange); color: var(--navy); padding: 12px 20px; font-weight: 500;
+}
+.skip-link:focus { left: 12px; top: 12px; }
+
+/* ---------- Buttons: rechteckig, Grossbuchstaben, kein Schatten ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 12px 26px;
+  border: 2px solid var(--navy);
+  background: var(--orange);
+  color: var(--navy);
+  font-size: 14px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase;
+  border-radius: 0;
+  transition: background var(--t), color var(--t), border-color var(--t);
+  white-space: nowrap;
+}
+.btn:hover, .btn:focus-visible { background: var(--navy); color: var(--orange); }
+.btn-sm { padding: 9px 18px; font-size: 13px; }
+
+/* Helle Sekundaer-Variante (z. B. "More info" neben einem orangen Haupt-CTA) */
+.btn-white { background: var(--offwhite); color: var(--navy); border-color: var(--navy); }
+.btn-white:hover, .btn-white:focus-visible { background: var(--navy); color: var(--offwhite); border-color: var(--navy); }
+
+.btn-ghost { background: transparent; color: var(--navy); border-color: var(--navy); }
+.btn-ghost:hover { background: var(--navy); color: var(--offwhite); }
+
+.btn-ghost-light,
+.on-navy .btn-ghost { background: transparent; color: var(--offwhite); border-color: rgba(232,232,240,.55); }
+.btn-ghost-light:hover,
+.on-navy .btn-ghost:hover { background: var(--offwhite); color: var(--navy); border-color: var(--offwhite); }
+/* .on-navy a faerbt sonst auch Buttons hell, dadurch waere Orange auf Orange unlesbar */
+.on-navy .btn, .on-navy a.btn { border-color: var(--orange); color: var(--navy); }
+.on-navy .btn:hover, .on-navy a.btn:hover { background: var(--offwhite); color: var(--navy); border-color: var(--offwhite); }
+.on-navy a.btn-ghost { color: var(--offwhite); }
+.on-navy a.btn-ghost:hover { color: var(--navy); }
+
+/* ---------- Header: transparent ueber dem Hero, Navy beim Scrollen,
+   Logo wechselt von dunkel auf weiss. Ohne Schatten. ---------- */
+#hdr {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+  background: transparent;
+  transition: background .4s ease, border-color .4s ease;
+  border-bottom: 2px solid transparent;
+}
+#hdr.scrolled {
+  background: rgba(0,0,41,.94);
+  backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+}
+.hdr-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  height: var(--hdr-h); gap: 16px;
+}
+.hdr-logo img { height: 30px; width: auto; }
+.logo-light { display: none; }
+#hdr.scrolled .logo-light { display: block; }
+#hdr.scrolled .logo-dark { display: none; }
+.hdr-right { display: flex; align-items: center; gap: 10px; }
+
+#hdr.scrolled .btn { background: var(--orange); color: var(--navy); border-color: var(--orange); }
+.hdr-right .btn:hover, .hdr-right .btn:focus-visible,
+#hdr.scrolled .btn:hover, #hdr.scrolled .btn:focus-visible { background: var(--orange); color: var(--navy); border-color: var(--orange); }
+
+.lang-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  height: 40px; min-width: 46px; padding: 0 10px;
+  border: 2px solid var(--navy-20); background: transparent; color: var(--navy);
+  font-size: 13px; font-weight: 500; letter-spacing: .06em;
+  transition: background var(--t), color var(--t), border-color var(--t);
+}
+.lang-btn:hover { border-color: var(--navy); background: var(--navy); color: var(--offwhite); }
+#hdr.scrolled .lang-btn { color: var(--offwhite); border-color: rgba(232,232,240,.4); }
+#hdr.scrolled .lang-btn:hover { background: var(--offwhite); color: var(--navy); border-color: var(--offwhite); }
+
+.burger-btn {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 5px; width: 40px; height: 40px;
+  border: 2px solid var(--navy); background: transparent;
+  transition: background var(--t), border-color var(--t);
+}
+.burger-btn span {
+  display: block; width: 18px; height: 2px; background: var(--navy);
+  transition: transform .28s ease, opacity .28s ease, background var(--t);
+}
+.burger-btn:hover { background: var(--navy); border-color: var(--navy); }
+.burger-btn:hover span { background: var(--orange); }
+#hdr.scrolled .burger-btn { border-color: rgba(232,232,240,.55); background: transparent; }
+#hdr.scrolled .burger-btn span { background: var(--offwhite); }
+#hdr.scrolled .burger-btn:hover { background: transparent; border-color: var(--orange); }
+#hdr.scrolled .burger-btn:hover span { background: var(--orange); }
+.burger-btn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.burger-btn.open span:nth-child(2) { opacity: 0; }
+.burger-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ---------- Slide-in Nav ---------- */
+.nav-backdrop {
+  position: fixed; inset: 0; z-index: 380;
+  background: rgba(0,0,41,.55); backdrop-filter: blur(3px);
+  opacity: 0; visibility: hidden; transition: opacity .3s ease, visibility .3s ease;
+}
+.nav-backdrop.open { opacity: 1; visibility: visible; }
+
+#nav-menu {
+  position: fixed; top: 0; right: 0; bottom: 0; z-index: 390;
+  width: 320px; max-width: 88vw;
+  background: var(--navy);
+  transform: translateX(100%);
+  transition: transform .32s cubic-bezier(.4,0,.2,1);
+  padding: 24px 26px 36px;
+  display: flex; flex-direction: column;
+  overflow-y: auto;
+}
+#nav-menu.open { transform: translateX(0); }
+.nav-close {
+  align-self: flex-end;
+  display: flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px;
+  border: 2px solid rgba(232,232,240,.35); background: transparent; color: var(--offwhite);
+  font-size: 1.1rem; margin-bottom: 22px;
+  transition: background var(--t), color var(--t), border-color var(--t);
+}
+.nav-close:hover { border-color: var(--orange); background: var(--orange); color: var(--navy); }
+.nav-label {
+  font-size: 11px; letter-spacing: .18em; text-transform: uppercase;
+  color: rgba(232,232,240,.5); margin-bottom: 8px;
+}
+#nav-menu a.nav-link {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 17px 0; font-size: 1.05rem; font-weight: 400; color: var(--offwhite);
+  border-bottom: 1px solid rgba(232,232,240,.14);
+  transition: color var(--t);
+}
+#nav-menu a.nav-link:hover { color: var(--orange); }
+#nav-menu a.nav-link.active { color: var(--orange); font-weight: 500; }
+.nav-cta { margin-top: 28px; }
+.nav-cta .btn {
+  width: 100%;
+}
+.nav-cta .btn:hover, .nav-cta .btn:focus-visible { background: var(--navy); color: var(--orange); border-color: var(--navy); }
+.nav-meta { margin-top: auto; padding-top: 28px; font-size: .82rem; color: rgba(232,232,240,.6); }
+.nav-meta a { display: block; margin-top: 6px; transition: color var(--t); }
+.nav-meta a:hover { color: var(--orange); }
+
+/* ---------- Footer ---------- */
+footer.site { background: var(--navy); color: var(--offwhite); border-top: 2px solid var(--offwhite); }
+.ft-top {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 28px;
+  padding: 56px 0 34px;
+}
+.ft-brand { max-width: 300px; }
+.ft-brand img.ft-logo { height: 28px; width: auto; margin-bottom: 16px; }
+.ft-tagline { font-size: 14.5px; color: rgba(232,232,240,.72); margin-bottom: 18px; }
+.ft-social { display: inline-flex; }
+.ft-social img { width: 24px; height: 24px; filter: brightness(0) invert(1); opacity: .8; transition: opacity var(--t); }
+.ft-social:hover img { opacity: 1; }
+
+.ft-cols {
+  display: grid; grid-template-columns: 1.2fr 1fr 1fr 1.2fr 1fr; gap: 28px;
+  border-top: 1px solid rgba(232,232,240,.18);
+  padding: 36px 0 40px;
+}
+.ft-col h4 {
+  font-size: 12px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--orange); margin-bottom: 14px;
+}
+.ft-col a, .ft-col p, .ft-col button {
+  display: block; font-size: 14px; font-weight: 300;
+  color: rgba(232,232,240,.78); margin-bottom: 9px; text-align: left;
+  transition: color var(--t);
+}
+.ft-col a:hover, .ft-col button:hover { color: var(--orange); }
+
+.ft-support { border-top: 1px solid rgba(232,232,240,.18); padding: 28px 0 30px; }
+.ft-support-label {
+  font-size: 12px; letter-spacing: .12em; text-transform: uppercase;
+  color: rgba(232,232,240,.55); margin-bottom: 16px;
+}
+.ft-support-logos { display: flex; flex-wrap: wrap; align-items: center; gap: 30px; }
+.ft-support-logos img { height: 26px; width: auto; filter: brightness(0) invert(1); opacity: .68; transition: opacity var(--t); }
+.ft-support-logos img[src*="qimp"] { height: 31.2px; width: auto; }
+.ft-support-logos img[src*="ifb-hamburg"] { height: 40.6px; width: auto; }
+.ft-support-logos a:hover img { opacity: 1; }
+
+.ft-bottom {
+  border-top: 1px solid rgba(232,232,240,.18);
+  padding: 18px 0;
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px;
+  font-size: 13px; color: rgba(232,232,240,.6);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 860px) {
+  .ft-cols { grid-template-columns: repeat(2, 1fr); gap: 22px 24px; }
+}
+
+@media (max-width: 560px) {
+  .hdr-right .btn { display: none; }        /* CTA liegt mobil im Burger-Panel */
+  .ft-support-logos { gap: 24px; }
+  .ft-support-logos img { height: 26px; width: auto; }
+}
+
+@media (max-width: 400px) {
+  .ft-cols { grid-template-columns: 1fr; }
+  .btn { padding: 13px 20px; font-size: .88rem; }
+}
+
+/* Print */
+@media print {
+  #hdr, #nav-menu, .nav-backdrop { display: none !important; }
+}
+
+/* ---------- Consent-Banner: aus, solange kein Tracking laeuft ----------
+   Diese Regeln stehen bewusst hier und nicht nur in anori.css:
+   home-circuit8.html laedt ausschliesslich site-chrome.css. Ohne sie
+   war das Banner-Markup dort voellig ungestylt und deshalb als Textblock
+   am Seitenende sichtbar.
+   Zusaetzlich traegt jedes Banner im HTML das Attribut hidden, damit es
+   auch ohne CSS unsichtbar bleibt. anori.js nimmt beides nur zurueck,
+   wenn ANORI_CONFIG.TRACKING_ENABLED auf true steht. Wer das Tracking
+   spaeter aktiviert, braucht auf home-circuit8.html zusaetzlich die
+   Banner-Optik aus anori.css (#consent, .consent-inner, ...). */
+#consent { display: none; }
+#consent[hidden] { display: none !important; }
+/* Doppelte Attribut-Angabe erhoeht nur die Spezifitaet, damit die Regel
+   die Footer-Link-Styles (.ft-col button) sicher schlaegt. Kein !important,
+   damit anori.js den Link per inline-style wieder einblenden kann. */
+[data-consent-link][data-consent-link] { display: none; }

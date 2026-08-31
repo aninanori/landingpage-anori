@@ -1,0 +1,829 @@
+/* ============================================================
+   ANORI TECH – Website 2026 (V3)
+   CI: Navy #000029 · Orange #FFBE00 · Light Blue #D4E4DD · White #E8E8F0
+   Typografie: Inter (Medium/Light), Fallback Helvetica Neue
+   Prinzip: keine runden Ecken, keine Schatten, harte Kanten,
+   Grid-Pattern als Hintergrundmotiv, Text steht auf vollflaechigen Bloecken
+   ============================================================ */
+
+@import url("site-chrome.css");
+
+:root {
+  --navy:       #000029;
+  --orange:     #FFBE00;
+  --lightblue:  #D4E4DD;
+  --offwhite:   #E8E8F0;
+  /* --white ist absichtlich KEIN reines Weiss. Siehe Regel "Keine weissen
+     Boxen" weiter unten (bei .grid-bg) - alle Komponenten, die --white als
+     Box-Hintergrund nutzen (.card, .panel, .framed, .step, .contact-card,
+     Tabellen, Presse- und Team-Kacheln usw.), landen dadurch automatisch
+     bei Off-White statt bei #FFFFFF. Reines Weiss gibt es nur noch als
+     --pure, fuer Sonderfaelle wie Logo-Kacheln, die echten Kontrast zu
+     bunten Partnerlogos brauchen. */
+  --white:      var(--offwhite);
+  --pure:       #FFFFFF;
+
+  --navy-80:    rgba(0,0,41,.80);
+  --navy-60:    rgba(0,0,41,.60);
+  --navy-45:    rgba(0,0,41,.45);
+  --navy-20:    rgba(0,0,41,.20);
+
+  --line:       rgba(0,0,41,.16);
+
+  --font: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+  --wrap: 1180px;
+  --gut: 28px;
+  --hdr-h: 80px;
+
+  /* Rastergroesse des Marken-Hintergrundmusters (.grid-bg / .grid-bg-navy /
+     .grid-bg-light). Einzige Stelle, an der diese Groesse definiert wird -
+     hier aendern wirkt auf jede Seite, die anori.css laedt. */
+  --grid: 23px;
+
+  --sp-section: 104px;
+  --t: .25s ease;
+}
+
+/* ---------- Reset ---------- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; overflow-x: hidden; }
+body {
+  font-family: var(--font);
+  font-weight: 300;
+  color: var(--navy);
+  background: var(--offwhite);
+  line-height: 1.62;
+  overflow-x: hidden;
+}
+/* height:auto ist Pflicht, sobald die Bilder width/height-Attribute tragen.
+   Ohne diese Zeile haelt der Browser die Attribut-Hoehe fest, waehrend
+   max-width die Breite schrumpft - das Bild wird in die Laenge gezogen.
+   Spezifischere Regeln weiter unten (z.B. .framed img { height: 100% })
+   ueberschreiben das wie gewohnt. */
+img, svg { max-width: 100%; height: auto; display: block; }
+a { color: inherit; text-decoration: none; }
+ul, ol { list-style: none; }
+button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+table { border-collapse: collapse; width: 100%; }
+:focus-visible { outline: 3px solid var(--orange); outline-offset: 2px; }
+
+/* Keine Schatten. Nirgends. */
+* { box-shadow: none !important; text-shadow: none !important; }
+
+/* ============================================================
+   GLOBALE DESIGN-REGEL: Hintergrundraster & Text-Boxen
+   ============================================================
+   Diese Regel gilt fuer JEDE Seite, die anori.css laedt - unabhaengig
+   davon, ob eine einzelne Seite (z. B. eine bestimmte Home-Version)
+   irgendwann umbenannt oder geloescht wird. Einzige Quelle: hier.
+
+   1) Rastergroesse: gesteuert ueber die Variable --grid (siehe :root
+      oben, aktuell 23px). Alle drei .grid-bg*-Klassen benutzen diese
+      eine Variable - Groesse aendern = eine Zeile in :root anpassen,
+      wirkt dann ueberall gleich. Seiten sollen die Groesse NICHT mehr
+      lokal ueberschreiben (kein eigenes background-size in einem
+      Seiten-<style>-Block).
+
+   2) Text steht nie direkt auf dem Karo-Raster. Jeder Textblock sitzt
+      auf einer einfarbigen Flaeche (.solid, oder Komponenten wie
+      .card/.panel/.framed/.contact-card/Tabellen/etc., die --white als
+      Hintergrund nutzen).
+
+   3) Keine weissen Boxen: --white ist bewusst auf var(--offwhite)
+      gesetzt (nicht #FFFFFF). Jede Komponente, die --white als
+      Hintergrund verwendet, ist dadurch automatisch Off-White statt
+      reinweiss. Reines Weiss (--pure) ist nur fuer Ausnahmen gedacht,
+      bei denen echter Kontrast noetig ist (z. B. Logo-Kacheln fuer
+      bunte Partnerlogos), nicht fuer Text-Boxen.
+   ============================================================ */
+
+/* ---------- Grid-Pattern (Marken-Motiv) ---------- */
+.grid-bg {
+  --block-bg: var(--offwhite);
+  background-color: var(--offwhite);
+  background-image:
+    linear-gradient(to right, var(--lightblue) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--lightblue) 1px, transparent 1px);
+  background-size: var(--grid) var(--grid);
+}
+.grid-bg-navy {
+  --block-bg: var(--navy);
+  background-color: var(--navy);
+  background-image:
+    linear-gradient(to right, rgba(212,228,221,.09) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(212,228,221,.09) 1px, transparent 1px);
+  background-size: var(--grid) var(--grid);
+}
+.grid-bg-light {
+  --block-bg: var(--lightblue);
+  background-color: var(--lightblue);
+  background-image:
+    linear-gradient(to right, rgba(0,0,41,.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0,0,41,.07) 1px, transparent 1px);
+  background-size: var(--grid) var(--grid);
+}
+
+/* Vollflaechiger Block hinter Text: das Raster laeuft im Hintergrund weiter,
+   hoert aber dort auf, wo Text steht. Kein Kaestchenmuster hinter Fliesstext.
+   .section-head bekommt dieselbe Box automatisch mit (siehe Selektoren unten),
+   weil eine Sektions-Ueberschrift in der Praxis IMMER auf einer soliden
+   Flaeche stehen soll - das haendische Zufuegen von "solid" bei jedem
+   section-head war die Fehlerquelle, die zu vergessenen Boxen fuehrte
+   (z. B. Karo-Muster hinter Ueberschriften). Wo die Sektion ohnehin keinen
+   Rasterhintergrund hat, ist die Box unsichtbar (gleiche Farbe wie der Rest
+   der Seite) und aendert optisch nichts. */
+.solid, .section-head { position: relative; }
+.solid > *, .section-head > * { position: relative; z-index: 1; }
+.solid::before, .section-head::before {
+  content: '';
+  position: absolute;
+  top: -28px; bottom: -28px;
+  left: 50%; width: 100vw; transform: translateX(-50%);
+  background: var(--block-bg, var(--offwhite));
+  z-index: 0;
+}
+
+/* ---------- Layout ---------- */
+.wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gut); }
+.section { padding: var(--sp-section) 0; position: relative; }
+.section-tight { padding: 72px 0; }
+.on-navy { color: var(--offwhite); }
+.on-navy a { color: var(--offwhite); }
+
+/* ---------- Typografie ---------- */
+h1, h2, h3, h4 { font-weight: 500; line-height: 1.14; letter-spacing: -.02em; }
+h1, .h1 { font-size: clamp(2.15rem, 5.1vw, 3.7rem); }
+h2, .h2 { font-size: clamp(1.7rem, 3.4vw, 2.6rem); }
+h3, .h3 { font-size: clamp(1.05rem, 1.5vw, 1.3rem); letter-spacing: -.01em; }
+p { font-weight: 300; }
+strong, b { font-weight: 500; }
+.lead { font-size: clamp(1.02rem, 1.5vw, 1.22rem); font-weight: 300; line-height: 1.55; }
+.small { font-size: .84rem; }
+.muted { color: var(--navy-60); }
+.on-navy .muted { color: rgba(232,232,240,.66); }
+
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: .7rem; font-weight: 500;
+  letter-spacing: .16em; text-transform: uppercase;
+  color: var(--navy-60);
+  margin-bottom: 20px;
+}
+.eyebrow::before { content: ''; width: 26px; height: 2px; background: var(--orange); flex-shrink: 0; }
+.on-navy .eyebrow { color: rgba(232,232,240,.7); }
+
+.section-head { max-width: 760px; margin-bottom: 76px; }
+.section-head p { margin-top: 16px; }
+
+.accent { color: var(--orange); }
+
+.link-arrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-weight: 500; font-size: .92rem;
+  border-bottom: 2px solid var(--orange);
+  padding-bottom: 2px;
+  transition: color var(--t), border-color var(--t);
+}
+.link-arrow:hover { color: var(--orange); }
+.on-navy .link-arrow:hover { color: var(--orange); }
+
+/* ---------- Hero ---------- */
+.hero { padding: calc(var(--hdr-h) + 64px) 0 84px; border-bottom: 2px solid var(--navy); }
+.hero-grid { display: grid; grid-template-columns: 1.06fr .94fr; gap: 60px; align-items: center; }
+.hero h1 { margin-bottom: 22px; }
+.hero .lead { max-width: 42ch; margin-bottom: 26px; color: var(--navy-80); }
+.hero-btns { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 26px; }
+
+/* GEO-Definitionsblock: reiner Text, kein Kasten */
+.definition { max-width: 60ch; font-size: .96rem; line-height: 1.6; color: var(--navy-80); }
+
+.hero-visual { position: relative; }
+.hero-img {
+  border: 2px solid var(--navy);
+  background: var(--white);
+  padding: 26px;
+  display: flex; align-items: center; justify-content: center;
+}
+.hero-img img { width: 100%; height: auto; }
+
+/* Kennzahlen-Karten */
+.metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: -2px; }
+.metric {
+  border: 2px solid var(--navy); border-right-width: 0;
+  background: var(--white);
+  padding: 18px 14px; text-align: center;
+}
+.metric:last-child { border-right-width: 2px; }
+.metric svg { width: 22px; height: 22px; margin: 0 auto 9px; stroke: var(--navy); }
+.metric-num { display: block; font-size: 1.28rem; font-weight: 500; line-height: 1.1; }
+.metric-label { font-size: .7rem; color: var(--navy-60); letter-spacing: .03em; }
+
+/* ---------- Karten / Kacheln ---------- */
+.card {
+  background: var(--white);
+  border: 2px solid var(--navy);
+  padding: 30px 26px;
+  height: 100%;
+  display: flex; flex-direction: column;
+}
+.card h3 { margin-bottom: 12px; }
+.card p { font-size: .93rem; color: var(--navy-80); }
+.card .card-icon { margin-bottom: 18px; }
+.card .card-icon svg { width: 30px; height: 30px; stroke: var(--navy); }
+.card-num {
+  font-size: .7rem; font-weight: 500; letter-spacing: .16em;
+  color: var(--navy-45); margin-bottom: 14px;
+}
+/* Logo innerhalb der Karte, z. B. bei den Unterstuetzern */
+.card-logo {
+  background: var(--white); border: 2px solid var(--white);
+  padding: 12px 16px; margin-bottom: 20px; align-self: flex-start;
+  display: flex; align-items: center;
+}
+.card-logo img { height: 30px; width: auto; }
+
+/* Hervorgehobene Stakes-Karte: Kontrast statt Schatten */
+.card-primary {
+  background: var(--navy); color: var(--offwhite);
+  border-color: var(--orange); border-width: 3px;
+}
+.card-primary h3 { color: var(--orange); }
+.card-primary p { color: rgba(232,232,240,.85); }
+.card-primary .card-icon svg { stroke: var(--orange); }
+.card-primary .card-num { color: rgba(232,232,240,.55); }
+
+.on-navy .card { background: rgba(232,232,240,.05); border-color: rgba(232,232,240,.28); color: var(--offwhite); }
+.on-navy .card p { color: rgba(232,232,240,.8); }
+.on-navy .card .card-icon svg { stroke: var(--orange); }
+.on-navy .card-num { color: rgba(232,232,240,.5); }
+
+/* Grids */
+.g2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.g3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.g4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.g5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+.g-split { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+/* Damit ein vollflaechiger Textblock nie ueber das Bild danebenlaeuft */
+.g-split > *, .hero-grid > * { position: relative; z-index: 1; }
+
+/* ---------- Anwendungs-Kacheln (Home) ---------- */
+.usecase {
+  border: 2px solid var(--navy);
+  background: var(--white);
+  display: flex; flex-direction: column;
+  transition: background var(--t), border-color var(--t), color var(--t);
+}
+.usecase:hover { background: var(--navy); border-color: var(--orange); color: var(--offwhite); }
+.usecase:hover .usecase-visual { border-bottom-color: var(--orange); }
+.usecase:hover .usecase-visual img { filter: none; }
+.usecase-visual {
+  aspect-ratio: 4 / 3;
+  border-bottom: 2px solid var(--navy);
+  background: var(--navy);
+  overflow: hidden;
+}
+.usecase-visual img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: filter var(--t);
+}
+.usecase-body {
+  padding: 16px 16px 18px;
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  font-size: .9rem; font-weight: 500;
+}
+.usecase-body span:last-child { color: var(--orange); }
+
+/* Bild-Platzhalter (blaues Viereck), falls kein Foto vorhanden */
+.img-placeholder {
+  background: var(--navy);
+  border: 2px solid var(--navy);
+  color: rgba(232,232,240,.65);
+  display: flex; align-items: center; justify-content: center;
+  text-align: center; font-size: .74rem; letter-spacing: .06em; text-transform: uppercase;
+  min-height: 180px;
+  position: relative; overflow: hidden;
+}
+.img-placeholder span { position: relative; z-index: 1; padding: 10px; }
+.img-placeholder::after {
+  content: ''; position: absolute; inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(212,228,221,.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(212,228,221,.1) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+/* ---------- Bildrahmen ---------- */
+.framed { border: 2px solid var(--navy); overflow: hidden; background: var(--white); }
+.framed img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.framed svg { width: 100%; height: auto; display: block; }
+.framed-caption {
+  border-top: 2px solid var(--navy);
+  padding: 10px 14px; font-size: .74rem; color: var(--navy-60);
+  background: var(--white);
+}
+
+/* ---------- Sektions-Trenner: BMS-Seitenansicht ----------
+   Sitzt am unteren Rand einer hellen Sektion, direkt ueber einer
+   dunkelblauen. Die Silhouette schneidet dadurch in die helle Flaeche. */
+.divider-bms {
+  line-height: 0;
+  margin-bottom: -1px;
+  display: flex;
+  justify-content: center;
+}
+.divider-bms img {
+  width: clamp(280px, 46vw, 660px);
+  height: auto;
+  display: block;
+}
+
+/* ---------- Plan: grosse Icons auf Navy-Kacheln ---------- */
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.step {
+  border: 2px solid var(--navy);
+  background: var(--white);
+  display: flex; flex-direction: column;
+}
+.step-visual {
+  background: var(--navy);
+  border-bottom: 2px solid var(--navy);
+  min-height: 168px;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.step-visual::after {
+  content: ''; position: absolute; inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(212,228,221,.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(212,228,221,.1) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+.step-visual svg { width: 76px; height: 76px; stroke: var(--orange); position: relative; z-index: 1; }
+.step-no {
+  position: absolute; top: 0; left: 0; z-index: 2;
+  display: flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px;
+  background: var(--orange); color: var(--navy);
+  font-weight: 500; font-size: 1rem;
+}
+.step-body { padding: 26px 26px 30px; }
+.step h3 { margin-bottom: 10px; }
+.step p { font-size: .92rem; color: var(--navy-80); }
+
+/* ---------- Tabellen ---------- */
+.spec-table { border: 2px solid var(--navy); background: var(--white); }
+.spec-table th, .spec-table td {
+  border-bottom: 1px solid var(--line);
+  padding: 14px 18px; text-align: left; font-size: .92rem; vertical-align: top;
+}
+.spec-table tr:last-child th, .spec-table tr:last-child td { border-bottom: none; }
+.spec-table th { font-weight: 500; width: 40%; background: rgba(212,228,221,.34); }
+.spec-table td { font-weight: 300; color: var(--navy-80); }
+
+.status-table { border: 2px solid var(--navy); background: var(--white); }
+.status-table th, .status-table td {
+  border-bottom: 1px solid var(--line); padding: 16px 18px; text-align: left; font-size: .92rem;
+}
+.status-table thead th {
+  background: var(--navy); color: var(--offwhite); font-weight: 500;
+  font-size: .72rem; letter-spacing: .13em; text-transform: uppercase; border-bottom: none;
+}
+.status-table tbody tr:last-child th, .status-table tbody tr:last-child td { border-bottom: none; }
+.status-table tbody th { font-weight: 500; }
+.status-pill {
+  display: inline-block; padding: 4px 11px;
+  border: 2px solid var(--navy); background: var(--lightblue);
+  font-size: .76rem; font-weight: 500;
+}
+.status-pill.active { background: var(--orange); }
+
+/* ---------- Logo-Leisten ---------- */
+.logo-strip { margin-top: 44px; }
+.logo-strip + .logo-strip { margin-top: 34px; }
+.logo-strip-label {
+  font-size: .68rem; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--navy-45); margin-bottom: 16px;
+  padding-bottom: 10px; border-bottom: 1px solid var(--line);
+}
+.on-navy .logo-strip-label { color: rgba(232,232,240,.55); border-color: rgba(232,232,240,.2); }
+.logo-row { display: flex; flex-wrap: wrap; align-items: center; gap: 34px; }
+.logo-row img { height: 34px; width: auto; opacity: .78; transition: opacity var(--t); }
+.logo-row a:hover img { opacity: 1; }
+.on-navy .logo-row img { filter: brightness(0) invert(1); opacity: .7; }
+
+/* Presse-Logos sind teils farbig, deshalb auf Navy weisse Kacheln statt Invertierung */
+.logo-row.tiles { gap: 16px; }
+.logo-row.tiles a, .logo-row.tiles > img {
+  display: flex; align-items: center; justify-content: center;
+  background: var(--white); border: 2px solid var(--white);
+  padding: 12px 20px; min-width: 150px; min-height: 62px;
+  transition: border-color var(--t);
+}
+.logo-row.tiles a:hover { border-color: var(--orange); }
+.on-navy .logo-row.tiles img,
+.logo-row.tiles img { filter: none; opacity: 1; height: 30px; width: auto; }
+
+/* ---------- Architektur-Diagramm ---------- */
+.diagram {
+  border: 2px solid var(--navy); background: var(--white);
+  padding: 34px 28px; margin-bottom: 44px;
+}
+.diagram svg { width: 100%; height: auto; }
+.diagram-caption { font-size: .78rem; color: var(--navy-60); margin-top: 18px; text-align: center; }
+
+/* ---------- FAQ ---------- */
+.faq { border-top: 2px solid var(--navy); }
+.faq-item { border-bottom: 2px solid var(--navy); background: var(--white); }
+.faq-q {
+  width: 100%; display: flex; align-items: flex-start; justify-content: space-between; gap: 20px;
+  padding: 22px 26px; text-align: left;
+  font-size: 1.02rem; font-weight: 500; line-height: 1.35;
+  transition: background var(--t);
+}
+.faq-q:hover { background: var(--lightblue); }
+.faq-icon { flex-shrink: 0; width: 22px; height: 22px; position: relative; margin-top: 3px; }
+.faq-icon::before, .faq-icon::after {
+  content: ''; position: absolute; background: var(--navy); transition: transform var(--t);
+}
+.faq-icon::before { top: 10px; left: 0; width: 22px; height: 2px; }
+.faq-icon::after { left: 10px; top: 0; width: 2px; height: 22px; }
+.faq-item.open .faq-icon::after { transform: scaleY(0); }
+.faq-item.open .faq-q { background: var(--lightblue); }
+.faq-a { display: none; padding: 0 26px 26px; max-width: 80ch; }
+.faq-item.open .faq-a { display: block; }
+.faq-a p { font-size: .95rem; color: var(--navy-80); }
+.faq-a p + p { margin-top: 12px; }
+.faq-a ol { counter-reset: faqnum; margin: 14px 0 0; }
+.faq-a ol li {
+  counter-increment: faqnum;
+  position: relative; padding-left: 46px; margin-bottom: 16px;
+  font-size: .95rem; color: var(--navy-80);
+}
+.faq-a ol li:last-child { margin-bottom: 0; }
+.faq-a ol li::before {
+  content: counter(faqnum);
+  position: absolute; left: 0; top: 1px;
+  width: 30px; height: 30px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--orange); border: 2px solid var(--navy);
+  font-weight: 500; font-size: .85rem; color: var(--navy);
+}
+.faq-a ol li strong { display: block; color: var(--navy); }
+
+/* ---------- Anwendungs-Sektionen (Low-Volt) ---------- */
+.app-row {
+  display: grid; grid-template-columns: 300px 1fr; gap: 0;
+  border: 2px solid var(--navy); background: var(--white);
+  scroll-margin-top: calc(var(--hdr-h) + 24px);
+}
+.app-row + .app-row { border-top-width: 0; }
+.app-visual { border: none; border-right: 2px solid var(--navy); min-height: 210px; overflow: hidden; }
+.app-visual img { width: 100%; height: 100%; object-fit: cover; }
+.app-visual.img-placeholder { border-width: 0; border-right: 2px solid var(--navy); min-height: 210px; }
+.app-body { padding: 32px 34px; }
+.app-body h3 { margin-bottom: 6px; }
+.app-tag {
+  display: inline-block; font-size: .66rem; letter-spacing: .15em; text-transform: uppercase;
+  color: var(--navy-45); margin-bottom: 14px;
+}
+.app-pain, .app-fit p { font-size: .94rem; color: var(--navy-80); }
+.app-fit { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line); }
+.app-label {
+  font-size: .66rem; font-weight: 500; letter-spacing: .15em; text-transform: uppercase;
+  color: var(--navy-45); margin-bottom: 7px;
+}
+h3 + .app-label { margin-top: 16px; }
+.app-fit .app-label { color: var(--navy); }
+.app-fit .app-label::before {
+  content: ''; display: inline-block; vertical-align: middle;
+  width: 18px; height: 2px; background: var(--orange); margin-right: 9px; margin-top: -2px;
+}
+
+/* ---------- Team ----------
+   Das Grid waechst automatisch mit. Eine neue Person ist ein weiterer
+   .person-Block, die .person-open-Kachel bleibt als letztes Element. */
+.person {
+  border: 2px solid var(--navy); background: var(--white);
+  display: flex; flex-direction: column;
+  transition: border-color var(--t);
+}
+.person-photo { aspect-ratio: 1/1; border-bottom: 2px solid var(--navy); overflow: hidden; }
+.person-photo img { width: 100%; height: 100%; object-fit: cover; }
+.person-body { padding: 22px 22px 24px; display: flex; flex-direction: column; flex: 1; }
+.person h3 { margin-bottom: 6px; font-size: 1.06rem; }
+.person-role {
+  font-size: .8rem; font-weight: 300; color: var(--navy-60);
+  margin-bottom: 16px;
+}
+.person-bio { font-size: .86rem; font-weight: 300; color: var(--navy-80); margin-top: 6px; margin-bottom: 12px; }
+.person-links { margin-top: auto; display: flex; flex-direction: column; gap: 9px; align-items: flex-start; }
+.person-links a, .person-links span {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: .8rem; color: var(--navy-80);
+  overflow-wrap: anywhere;
+  transition: color var(--t);
+}
+.person-links a:hover { color: var(--orange); }
+.person-links svg { width: 15px; height: 15px; flex-shrink: 0; }
+
+/* "Und du?"-Kachel */
+.person-open { background: var(--navy); color: var(--offwhite); border-color: var(--orange); }
+.person-open:hover { background: var(--orange); border-color: var(--navy); color: var(--navy); }
+.person-open h3 { color: var(--orange); }
+.person-open:hover h3 { color: var(--navy); }
+.person-open .person-role { color: rgba(232,232,240,.72); }
+.person-open:hover .person-role { color: var(--navy); }
+.person-open .person-bio { color: var(--orange); }
+.person-open:hover .person-bio { color: var(--navy); }
+.person-photo-open {
+  display: flex; align-items: center; justify-content: center;
+  border-bottom-color: var(--orange);
+  position: relative; overflow: hidden;
+}
+.person-photo-open::after {
+  content: ''; position: absolute; inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(212,228,221,.11) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(212,228,221,.11) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+.person-photo-open svg { width: 68px; height: 68px; stroke: var(--orange); position: relative; z-index: 1; transition: stroke var(--t); }
+.person-open:hover .person-photo-open { border-bottom-color: var(--navy); }
+.person-open:hover .person-photo-open svg { stroke: var(--navy); }
+.person-open .person-links span { color: var(--orange); font-weight: 500; }
+.person-open:hover .person-links span { color: var(--navy); }
+.person-open .link-arrow { border-bottom-color: var(--orange); }
+.person-open:hover .link-arrow { border-bottom-color: var(--navy); }
+
+/* ---------- Unterstützer ---------- */
+.supporter {
+  border: 2px solid rgba(232,232,240,.28);
+  background: rgba(232,232,240,.05);
+  display: flex; flex-direction: column; height: 100%;
+}
+.supporter-photo {
+  aspect-ratio: 3 / 2;
+  border-bottom: 2px solid rgba(232,232,240,.28);
+  background: rgba(232,232,240,.14);
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(232,232,240,.55);
+  font-size: .7rem; letter-spacing: .14em; text-transform: uppercase;
+  overflow: hidden;
+}
+.supporter-photo img { width: 100%; height: 100%; object-fit: cover; }
+.supporter-body { padding: 24px 24px 26px; display: flex; flex-direction: column; flex: 1; }
+.supporter-logo {
+  background: var(--white); border: 2px solid var(--white);
+  padding: 10px 14px; margin-bottom: 18px; align-self: flex-start;
+  display: flex; align-items: center;
+}
+.supporter-logo img { height: 26px; width: auto; }
+.supporter h3 { margin-bottom: 10px; font-size: 1.06rem; }
+.supporter p { font-size: .9rem; color: rgba(232,232,240,.8); margin-bottom: 20px; }
+.supporter .link-arrow { margin-top: auto; align-self: flex-start; font-size: .82rem; }
+
+/* ---------- Panel: Text auf lesbarem Untergrund statt direkt auf dem Raster ----------
+   Reine Text-Box, deshalb ohne Rahmen (siehe Regel bei .legal-card weiter unten). */
+.panel {
+  background: var(--white);
+  padding: 36px 34px;
+}
+.panel .lead { color: var(--navy-80); }
+.panel-address {
+  margin-top: 24px; padding-top: 20px;
+  border-top: 1px solid var(--line);
+  font-size: .92rem; color: var(--navy-80);
+}
+
+/* ---------- Presse ---------- */
+.press-item {
+  border: 2px solid var(--navy); background: var(--white);
+  display: grid; grid-template-columns: 190px 1fr; gap: 0;
+  scroll-margin-top: calc(var(--hdr-h) + 24px);
+}
+.press-item + .press-item { border-top-width: 0; }
+.press-logo {
+  border-right: 2px solid var(--navy);
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px; background: var(--white);
+}
+.press-logo img { max-height: 42px; width: auto; }
+.press-logo.img-placeholder { background: var(--navy); color: rgba(232,232,240,.65); }
+.press-body { padding: 26px 30px; }
+.press-meta {
+  font-size: .7rem; letter-spacing: .13em; text-transform: uppercase;
+  color: var(--navy-45); margin-bottom: 12px;
+}
+.press-quote { font-size: .96rem; color: var(--navy-80); font-style: italic; }
+.press-body .link-arrow { margin-top: 16px; font-size: .84rem; }
+
+/* ---------- CTA-Band ---------- */
+.cta-band { border-top: 2px solid var(--orange); }
+.cta-band.no-rule { border-top: none; }
+.cta-band h2 { margin-bottom: 18px; }
+.cta-band .lead { max-width: 56ch; margin-bottom: 32px; color: rgba(232,232,240,.82); }
+.cta-actions { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+.cta-contact { margin-top: 26px; font-size: .9rem; color: rgba(232,232,240,.7); }
+.cta-contact a { border-bottom: 1px solid var(--orange); transition: color var(--t); }
+.cta-contact a:hover { color: var(--orange); }
+
+/* ---------- Consent-Banner (vorbereitet, standardmaessig inaktiv) ---------- */
+#consent {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 400;
+  display: none;
+  background: var(--navy); color: var(--offwhite);
+  border-top: 2px solid var(--orange);
+  padding: 22px 0;
+}
+#consent.show { display: block; }
+/* Solange kein Tracking laeuft (ANORI_CONFIG.TRACKING_ENABLED = false in
+   assets/anori.js), sind Banner und Footer-Link komplett aus. Das
+   hidden-Attribut wirkt zusaetzlich, falls CSS nicht geladen wird;
+   anori.js nimmt beides nur dann zurueck, wenn Tracking aktiviert wird. */
+#consent[hidden] { display: none !important; }
+/* Doppelte Attribut-Angabe erhoeht nur die Spezifitaet, damit die Regel
+   die Footer-Link-Styles (.ft-col button) sicher schlaegt. Kein !important,
+   damit anori.js den Link per inline-style wieder einblenden kann. */
+[data-consent-link][data-consent-link] { display: none; }
+.consent-inner { display: flex; flex-wrap: wrap; align-items: center; gap: 20px; justify-content: space-between; }
+.consent-text { font-size: .87rem; color: rgba(232,232,240,.82); max-width: 60ch; }
+.consent-text a { border-bottom: 1px solid var(--orange); }
+.consent-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+
+/* ---------- Sonstiges ---------- */
+/* Reine Text-Box (keine Bild-/Icon-Kachel), deshalb ohne Rahmen. */
+.notice { background: var(--lightblue); padding: 22px 24px; font-size: .92rem; }
+.anchor { scroll-margin-top: calc(var(--hdr-h) + 24px); }
+
+/* ---------- Rechtstexte (Impressum / Datenschutz) ---------- */
+.legal-back { display: inline-flex; align-items: center; gap: 6px; font-size: .82rem; font-weight: 500; color: var(--navy-60); margin-bottom: 32px; transition: color var(--t); }
+.legal-back:hover { color: var(--navy); }
+.legal-back svg { transition: transform var(--t); }
+.legal-back:hover svg { transform: translateX(-3px); }
+/* Reine Text-Box: kein Rahmen. Boxen mit Bild/Icon (Cards, Team, Presse ...)
+   behalten ihren Rahmen weiterhin als Gestaltungsmittel. */
+.legal-card { background: var(--white); padding: 52px 56px; max-width: 780px; }
+.legal-card h1 { margin-bottom: 8px; }
+.legal-stand { font-size: .84rem; color: var(--navy-45); margin-bottom: 36px; }
+.legal-body h4 { font-size: .74rem; font-weight: 600; text-transform: uppercase; letter-spacing: .1em; color: var(--navy-60); margin-top: 30px; margin-bottom: 8px; }
+.legal-body h4:first-child { margin-top: 0; }
+.legal-body p { font-size: .95rem; color: var(--navy-80); line-height: 1.75; }
+.legal-body p + p { margin-top: 10px; }
+.legal-body ul { list-style: disc; padding-left: 20px; font-size: .95rem; color: var(--navy-80); line-height: 1.75; margin: 8px 0; }
+.legal-body ul li { margin-bottom: 4px; }
+.legal-body a { text-decoration: underline; text-underline-offset: 2px; }
+.legal-body a:hover { color: var(--orange); }
+.legal-divider { border: none; border-top: 1px solid var(--line); margin: 28px 0; }
+
+/* Reine Text-Box, deshalb ohne Rahmen. */
+.contact-card {
+  background: var(--white);
+  padding: 32px 30px;
+  display: flex; flex-direction: column; align-items: flex-start;
+  transition: background var(--t), color var(--t);
+}
+.contact-card:hover { background: var(--navy); color: var(--offwhite); }
+.contact-card:hover .contact-label, .contact-card:hover .contact-note { color: rgba(232,232,240,.65); }
+.contact-card .contact-label {
+  font-size: .68rem; letter-spacing: .15em; text-transform: uppercase;
+  color: var(--navy-45); margin-bottom: 12px; transition: color var(--t);
+}
+.contact-card .contact-value {
+  font-size: clamp(1.15rem, 2.4vw, 1.7rem); font-weight: 500; letter-spacing: -.01em;
+  line-height: 1.25; word-break: break-word;
+}
+.contact-card .contact-note { font-size: .86rem; color: var(--navy-60); margin-top: 12px; transition: color var(--t); }
+
+/* Fade-in */
+.js .fi { opacity: 0; transform: translateY(16px); transition: opacity .55s ease, transform .55s ease; }
+.fi.vis { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .js .fi { opacity: 1; transform: none; transition: none; }
+  html { scroll-behavior: auto; }
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 1024px) {
+  :root { --sp-section: 80px; }
+  .hero-grid { gap: 42px; }
+  .g-split { gap: 38px; }
+  .g5 { grid-template-columns: repeat(3, 1fr); }
+  .g4 { grid-template-columns: repeat(2, 1fr); }
+  .team-grid { grid-template-columns: repeat(2, 1fr); }
+  .app-row { grid-template-columns: 240px 1fr; }
+  .panel { padding: 28px 26px; }
+  .press-item { grid-template-columns: 150px 1fr; }
+}
+
+@media (max-width: 860px) {
+  :root { --sp-section: 66px; --gut: 20px; --hdr-h: 70px; }
+  .hero { padding: calc(var(--hdr-h) + 44px) 0 58px; }
+  .hero-grid { grid-template-columns: 1fr; gap: 38px; }
+  .hero .lead { max-width: none; }
+  .g-split { grid-template-columns: 1fr; }
+  .g2, .g3 { grid-template-columns: 1fr; }
+  .g5 { grid-template-columns: repeat(2, 1fr); }
+  .steps { grid-template-columns: 1fr; gap: 20px; }
+  .step-visual { min-height: 140px; }
+  .step-visual svg { width: 60px; height: 60px; }
+  .metrics { grid-template-columns: 1fr; }
+  .metric { border-right-width: 2px; border-bottom-width: 0; display: flex; align-items: center; gap: 14px; text-align: left; padding: 14px 18px; }
+  .metric:last-child { border-bottom-width: 2px; }
+  .metric svg { margin: 0; flex-shrink: 0; }
+  .metric-num { font-size: 1.1rem; }
+  .app-row { grid-template-columns: 1fr; }
+  .app-visual, .app-visual.img-placeholder { border-right: none; border-bottom: 2px solid var(--navy); min-height: 170px; }
+  .press-item { grid-template-columns: 1fr; }
+  .press-logo { border-right: none; border-bottom: 2px solid var(--navy); padding: 20px; justify-content: flex-start; }
+  .section-head { margin-bottom: 58px; }
+  .diagram { padding: 22px 16px; }
+  .solid::before, .section-head::before { top: -20px; bottom: -20px; }
+}
+
+@media (max-width: 560px) {
+  h1, .h1 { font-size: 2rem; }
+  .hdr-logo img { height: 25px; width: auto; }
+  .g5 { grid-template-columns: 1fr; }
+  .g4 { grid-template-columns: 1fr; }
+  .team-grid { grid-template-columns: 1fr; }
+  .panel { padding: 24px 20px; }
+  .legal-card { padding: 28px 22px; }
+  .card { padding: 24px 20px; }
+  .step-body { padding: 22px 20px 26px; }
+  .app-body { padding: 24px 22px; }
+  .press-body { padding: 22px 20px; }
+  .faq-q { padding: 18px 20px; font-size: .96rem; }
+  .faq-a { padding: 0 20px 22px; }
+  .spec-table th, .spec-table td { padding: 12px 14px; font-size: .87rem; }
+  .spec-table th { width: 46%; }
+
+  /* Zertifizierungstabelle: gestapelte Karten statt drei Spalten */
+  .status-table, .status-table tbody, .status-table tr, .status-table th, .status-table td { display: block; width: 100%; }
+  .status-table thead { position: absolute; left: -9999px; }
+  .status-table tbody tr { border-bottom: 2px solid var(--navy); padding: 18px 16px; }
+  .status-table tbody tr:last-child { border-bottom: none; }
+  .status-table tbody th, .status-table tbody td { border: none; padding: 0; font-size: .89rem; }
+  .status-table tbody th { font-size: 1rem; margin-bottom: 10px; }
+  .status-table tbody td[data-label]::before {
+    content: attr(data-label);
+    display: block;
+    font-size: .64rem; letter-spacing: .15em; text-transform: uppercase;
+    color: var(--navy-45); margin-bottom: 5px;
+  }
+  .status-table tbody td + td { margin-top: 14px; }
+  .status-pill { white-space: normal; }
+
+  .hero-img { padding: 18px; }
+  .logo-row { gap: 24px; }
+  .logo-row img { height: 28px; width: auto; }
+  .consent-inner { flex-direction: column; align-items: stretch; }
+  .consent-actions .btn { flex: 1; }
+}
+
+@media (max-width: 400px) {
+
+  /* Specs-Tabelle: auf sehr schmalen Geraeten gestapelt statt zweispaltig */
+  .spec-table, .spec-table tbody, .spec-table tr, .spec-table th, .spec-table td { display: block; width: 100%; }
+  .spec-table tbody tr { border-bottom: 1px solid var(--line); padding: 14px 16px; }
+  .spec-table tbody tr:last-child { border-bottom: none; }
+  .spec-table th {
+    background: none; width: 100%; padding: 0 0 5px; border: none;
+    font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; color: var(--navy-45);
+  }
+  .spec-table td { padding: 0; border: none; overflow-wrap: anywhere; }
+}
+
+/* Print */
+@media print {
+  #hdr, #nav-menu, .nav-backdrop, #consent, .cta-band { display: none !important; }
+  body { background: #fff; }
+  .faq-a { display: block !important; }
+}
+
+/* Kontaktlinks ohne JavaScript: es gibt kein href, also auch keinen
+   Klick-Cursor vorgaukeln. Siehe anoriContacts() in assets/anori.js. */
+a.btn:not([href]), a.contact-card:not([href]), .nav-meta a:not([href]), .ft-col a:not([href]) { cursor: default; }
+
+
+/* ---------- Aktualitaetsangabe am Ende einer Inhaltsseite ----------
+   Steht rechtsbuendig auf derselben Kante wie der Inhalt darueber,
+   in Navy statt Grau, mit der duennen Trennlinie, die auch sonst
+   Abschnitte trennt. Bewusst am Ende des letzten INHALTS-Abschnitts
+   und nicht hinter dem dunklen Schluss-CTA, wo es frei schweben wuerde.
+   <time datetime> macht das Datum maschinenlesbar (GEO-Signal). */
+.page-updated {
+  margin-top: 56px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  text-align: right;
+  font-size: .82rem;
+  line-height: 1.5;
+  color: var(--navy);
+  letter-spacing: .01em;
+}
+.page-updated time { font-weight: 500; }
+.on-navy .page-updated { color: var(--offwhite); border-top-color: rgba(232,232,240,.22); }
+@media (max-width: 640px) { .page-updated { margin-top: 40px; text-align: left; } }

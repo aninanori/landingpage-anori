@@ -1,0 +1,40 @@
+User-agent: *
+Allow: /
+
+# KI-Crawler ausdruecklich erlaubt (Sichtbarkeit in AI Overviews,
+# ChatGPT, Perplexity, Claude). Blockieren wuerde nur das Training
+# betreffen, nicht die normale Google-Indexierung.
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Arbeitsstaende und Referenzdokumente gehoeren nicht in den Index
+Disallow: /Archiv-V3/
+Disallow: /_backup-vor-seo-20260814/
+Disallow: /_originale-gross/
+Disallow: /Footer-Navbar-Menu.html
+
+# Kompaktes Firmen- und Produktprofil fuer KI-Systeme
+# https://anoritech.com/llms.txt
+
+Sitemap: https://anoritech.com/sitemap.xml

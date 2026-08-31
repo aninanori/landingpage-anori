@@ -1,0 +1,33 @@
+/* ============================================================
+   Inter, lokal gehostet.
+   Ersetzt den frueheren Aufruf von fonts.googleapis.com:
+   kein Render-Blocking durch einen fremden Server und kein
+   Verbindungsaufbau zu Google ohne Einwilligung.
+
+   Im Ordner liegen bewusst nur zwei Dateien. Der Variable Font
+   deckt alle Strichstaerken von 100 bis 900 in einem Request ab,
+   die Kursiv-Datei wird fuer das CEO-Zitat auf der Startseite
+   und die Pressezitate gebraucht. Die restlichen 151 Dateien aus
+   dem Inter-Paket (statische Einzelschnitte, Display-Variante,
+   TTC) sind entfernt - sie wuerden nur den Ordner aufblaehen.
+
+   font-display: swap = der Text ist sofort in der Systemschrift
+   lesbar und wird ersetzt, sobald Inter geladen ist. Damit kann
+   die Schrift das Rendern nicht mehr blockieren.
+   ============================================================ */
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('InterVariable.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('InterVariable-Italic.woff2') format('woff2');
+}

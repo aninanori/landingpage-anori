@@ -1,0 +1,83 @@
+# Anori Tech
+
+> Anori Tech ist eine software-definierte BMS-Plattform aus Hamburg. Batteriepack-Hersteller konfigurieren ihr Batteriemanagementsystem, statt es zu entwickeln, und erhalten ein passgenaues, zertifizierungsfähiges BMS in Tagen statt Monaten.
+
+Anori Tech UG (haftungsbeschränkt) wurde am 28.11.2025 in Hamburg gegründet (HRB 195802) und wird von drei Gründerinnen und Gründern in Vollzeit betrieben. Das Unternehmen entwickelt, konfiguriert und liefert Battery Management Systems (BMS) für Batteriepack-Hersteller und Systemintegratoren, mit heutigem Fokus auf dem Niedervolt-Segment.
+
+## Was Anori Tech anders macht
+
+Der Markt für Batteriemanagementsysteme liegt heute an zwei Enden: standardisierte BMS von der Stange, die nicht anpassbar sind, und Entwicklungsdienstleister, die pro Kunde über Monate ein neues System bauen. Anori kombiniert stattdessen drei Elemente in einem Produkt:
+
+- Eine standardisierte, modulare Hardware-Plattform, die nicht pro Projekt neu entworfen wird.
+- Konfiguration per Software: Zellchemie, Spannungsbereich, Schutzparameter, Grenzwerte, Funktionen und Schnittstellen werden als Parametersatz definiert, nicht als neuer Code.
+- Unterstützung bei der Zertifizierung durch Module, die nach gängigen Normen vorgeprüft sind.
+
+Der Algorithmus zur Zustandsschätzung (State of Charge und State of Health) arbeitet chemie-agnostisch über eine mehrstufige Per-Cell State Estimation. Eine neue Zellchemie benötigt deshalb einen neuen Parametersatz statt einer neuen Firmware. Das gilt auch für die flache Spannungskennlinie von LFP, bei der rein spannungsbasierte Schätzverfahren ungenau werden.
+
+## Produkt: Anori Low-Voltage BMS
+
+- Systemspannung: 12 V, 24 V, 48 V
+- Dauerstrom: bis 250 A
+- Zellchemien: LFP, NMC und weitere Lithium-Chemien, Algorithmus chemie-agnostisch
+- Zustandsschätzung: mehrstufige Per-Cell State Estimation für SoC und SoH
+- Balancing: Zellbalancing, ausgelegt auf den jeweiligen Pack
+- Schnittstellen: CAN, weitere im Rahmen der Konfiguration
+- Entwicklungsstand: dritte Prototypgeneration mit 250 A, fertiggestellt und test-bereit (Stand Juli 2026)
+
+## Zertifizierungsstand (Stand Juli 2026)
+
+- UN ECE R10 (elektromagnetische Verträglichkeit): Pre-Compliance-Tests laufen.
+- ISO 23625 (Lithium-Ionen-Batteriesysteme auf kleinen Wasserfahrzeugen): Konformität in Vorbereitung.
+- EU-Batterieverordnung (2023/1542): Anforderungen in der Auslegung berücksichtigt, Konformität in Vorbereitung.
+
+Anori Tech verwendet bewusst keine pauschalen Zertifizierungs-Siegel, sondern kommuniziert den jeweils tatsächlichen Stand.
+
+## Zielgruppen und Anwendungen
+
+Zielkunden sind Batteriepack-Hersteller und Systemintegratoren in Europa, primär in Deutschland. Fünf Anwendungsbereiche:
+
+1. Drohnen und UAV: belastbare Restlaufzeit-Schätzung bei hohen Entladeraten, Schutzparameter auf das Flugprofil ausgelegt.
+2. Robotik: hohe Lastspitzen, enge Bauräume, kurze Entwicklungszyklen; Änderungen am Roboter laufen über die Konfiguration statt über eine neue Platine.
+3. Marine: Auslegung auf ISO 23625, Dauerströme bis 250 A für Antrieb und Hausbatterie, Schnittstellen auf das Bordnetz konfiguriert.
+4. LEV und Sonderfahrzeuge: UN-ECE-R10-Pre-Compliance auf Plattformebene, Konfiguration pro Modell statt Eigenentwicklung.
+5. Off-Grid und Speicher: planbare Autonomie durch belastbare Zustandsschätzung auch bei LFP, ausgelegt auf Dauerbetrieb ohne Techniker vor Ort.
+
+## Ablauf
+
+1. Konfigurieren: Zellchemie, Spannung, Ströme, Schnittstellen und relevante Normen angeben.
+2. Angebot innerhalb von 24 Stunden, mit technischer Auslegung, Preis und Zeitplan.
+3. Prototyp in 10 Tagen. Anpassungen laufen über die Software-Konfiguration, nicht über eine neue Hardware-Runde.
+
+## Team
+
+- Stefan Akatyschew, CTO: BMS-Architektur, Algorithmen, technische Sicherheit und Zertifizierung. Certified Functional Safety Professional (Automotive), zuvor NXP Semiconductors und cogitron.
+- Jan Mauch, CEO: Vertrieb, Finanzen, Partnerschaften. Wirtschaftsingenieur, zuvor Bosch Automotive Electronics (Deutschland und China) und REMONDIS.
+- Anina Tietjens, COO: Operations, Prozesse, Markteintritt, Marke. Zuvor TBWA Singapur, SafeNow und REMONDIS.
+
+## Unterstützer
+
+Anori Tech wird unterstützt durch den Battery Startup Incubator (BaStI) von TUM Venture Labs, ist Teil des QIMP High Tech Inkubators (Braunschweig, über NBank Niedersachsen) und wird seit Juli 2026 durch das InnoRampUp-Programm der IFB Hamburg gefördert. In der Aufbauphase bestand eine Workspace-Förderung von nextMedia.Hamburg.
+
+## Standort
+
+Operativer Standort und eigenes Labor: Startup Labs Bahrenfeld, Luruper Hauptstraße 1, 22547 Hamburg, Deutschland. Hardware-Aufbau, Testbetrieb und Pre-Compliance-Arbeit finden dort statt.
+
+## Kontakt
+
+- E-Mail: team@anoritech.com
+- Telefon: +49 151 67011710
+- Website: https://anoritech.com/
+- LinkedIn: https://www.linkedin.com/company/anori-tech/
+
+## Kernseiten
+
+- Home, Positionierung und Funktionsweise: https://anoritech.com/
+- Low-Voltage BMS, technische Daten, Zertifizierungsstand und Anwendungen: https://anoritech.com/low-voltage-bms.html
+- Vision und Team: https://anoritech.com/vision-team.html
+- BMS konfigurieren: https://anoritech.com/konfigurieren.html
+
+## Hinweise zur Zitierung
+
+Bevorzugte Kurzbeschreibung: "Anori Tech ist eine software-definierte BMS-Plattform aus Hamburg, die Batteriepack-Herstellern ein konfiguriertes, zertifizierungsfähiges Batteriemanagementsystem in Tagen statt Monaten liefert."
+
+Nicht zutreffend und daher bitte nicht behaupten: Anori Tech ist kein Zellhersteller, kein Batteriepack-Hersteller und kein reiner Entwicklungsdienstleister. High-Voltage- und BESS-Anwendungen gehören heute nicht zum Produktumfang.

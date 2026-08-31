@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-i18n="meta.lvbms.title">Low-Voltage BMS: 12V–48V, konfigurierbar | Anori Tech</title>
+<meta name="description" content="Konfigurierbares Low-Voltage BMS für Drohnen, Robotik, Marine, LEV und Off-Grid. 3–16 Zellen, bis 48 V, 250 A, chemie-agnostisch. Prototyp in 10 Tagen." data-i18n-attr="content:meta.lvbms.description">
+<link rel="canonical" href="https://anoritech.com/low-voltage-bms.html">
+<meta name="robots" content="index, follow">
+
+<meta property="og:type" content="product">
+<meta property="og:site_name" content="Anori Tech">
+<meta property="og:title" content="Das konfigurierbare BMS bis 48 V | Anori Tech" data-i18n-attr="content:meta.lvbms.ogtitle">
+<meta property="og:description" content="3 bis 16 Zellen, bis 250 A Dauerstrom. Konfiguriert für Ihre Zellchemie, Ihre Schnittstellen, Ihre Norm." data-i18n-attr="content:meta.lvbms.ogdesc">
+<meta property="og:url" content="https://anoritech.com/low-voltage-bms.html">
+<meta property="og:image" content="https://anoritech.com/assets/img/og-low-voltage-bms.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Anori Low-Voltage BMS vor blauem Himmel" data-i18n-attr="content:meta.lvbms.ogalt">
+<meta property="og:locale" content="de_DE">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://anoritech.com/assets/img/og-low-voltage-bms.jpg">
+
+<meta name="theme-color" content="#000029">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="icon" type="image/svg+xml" href="assets/logos/anori-circlebox-blue500.svg">
+<link rel="preload" href="assets/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/fonts/inter.css">
+<link rel="stylesheet" href="assets/anori.css">
+<style>
+  /* Seiten-spezifisch: Hintergrundraster laeuft hier durchgaengig ueber die
+     ganze Seite statt nur in einzelnen .grid-bg-Sektionen. Rastergroesse und
+     die Off-White-statt-Weiss-Regel sind global in assets/anori.css (--grid,
+     --white) definiert und muessen hier nicht mehr wiederholt werden. */
+  body {
+    background-color: var(--offwhite);
+    background-image:
+      linear-gradient(to right, var(--lightblue) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--lightblue) 1px, transparent 1px);
+    background-size: var(--grid) var(--grid);
+  }
+
+  /* Headerbild: Foto der Platine gegen den Himmel, im Markenrahmen.
+     object-fit deckelt die Hoehe, ohne das Bild zu verzerren. */
+  .hero-visual img { width: 100%; height: auto; max-height: 620px; object-fit: cover; display: block; }
+
+  /* ---------- Textbox-Regel, seitenlokale Korrektur ----------
+     In anori.css legt .solid / .section-head eine einfarbige Flaeche hinter
+     den Text, damit das Rasterbild nicht durch Fliesstext scheint. Die
+     Flaeche geht dort ueber die volle Viewport-Breite (width:100vw). Bei
+     kurzen Ueberschriften wirkt dieser Vollbreitstreifen zu lang, deshalb
+     laeuft die Box hier nur um den Textblock herum, mit etwas Ueberstand.
+     Bewusst nur auf dieser Seite: home, vision-team und
+     konfigurieren behalten vorerst das alte Verhalten. Wenn es gefaellt,
+     wandert die Regel nach anori.css und dieser Block kann weg. */
+  .solid::before, .section-head::before {
+    left: -30px; right: -30px; width: auto; transform: none;
+    top: -22px; bottom: -22px;
+  }
+  @media (max-width: 640px) {
+    .solid::before, .section-head::before { left: -18px; right: -18px; }
+  }
+
+  /* ---------- Stakes-Band: schmaler als eine normale Sektion ---------- */
+  .stakes-band { padding: 40px 0; }
+  .stakes-band .lead { margin: 0; }
+  .stakes-band strong { font-weight: 500; color: var(--orange); }
+
+  /* ---------- Produkt-Karten: hellblau, damit sie sich von den
+     weissen Tabellen und Rahmen im Rest der Seite absetzen ---------- */
+  .card-lightblue { background: var(--lightblue); }
+
+  /* ---------- Prinzipgrafik ----------
+     Bewusst ohne Rahmen und ueber die volle Spaltenbreite: die Grafik ist
+     3579 x 1279, also sehr breit. Im halbbreiten Raster daneben waere die
+     Beschriftung im Bild zu klein zum Lesen. */
+  .prod-figure { margin: 52px 0 0; }
+  .prod-figure img { width: 100%; height: auto; display: block; }
+  .prod-figure figcaption {
+    font-size: .74rem; color: var(--navy-60);
+    margin-top: 10px; text-align: center;
+  }
+
+  /* ---------- Datenblatt ----------
+     Oben stehen die acht Werte, nach denen zuerst gefragt wird. Der Rest
+     liegt in einem <details>, damit die Sektion ruhig bleibt. Bewusst
+     natives <details> statt JS-Akkordeon: der Inhalt steht so oder so im
+     DOM und ist fuer Suchmaschinen und LLMs lesbar, auch zugeklappt. */
+  .spec-more { margin-top: 30px; border: 2px solid var(--navy); background: var(--white); }
+  .spec-more > summary {
+    list-style: none; cursor: pointer;
+    padding: 20px 24px;
+    font-weight: 500; font-size: .98rem;
+    display: flex; align-items: center; justify-content: space-between; gap: 20px;
+    transition: background var(--t);
+  }
+  .spec-more > summary::-webkit-details-marker { display: none; }
+  .spec-more > summary:hover { background: var(--lightblue); }
+  .spec-more[open] > summary { border-bottom: 2px solid var(--navy); }
+  .spec-more .sm-icon { flex-shrink: 0; width: 22px; height: 22px; position: relative; }
+  .spec-more .sm-icon::before,
+  .spec-more .sm-icon::after { content: ''; position: absolute; background: var(--navy); transition: transform var(--t); }
+  .spec-more .sm-icon::before { top: 10px; left: 0; width: 22px; height: 2px; }
+  .spec-more .sm-icon::after { left: 10px; top: 0; width: 2px; height: 22px; }
+  .spec-more[open] .sm-icon::after { transform: scaleY(0); }
+  .spec-more-body { padding: 30px 24px 32px; }
+
+  .spec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px 32px; align-items: start; }
+  @media (max-width: 860px) { .spec-grid { grid-template-columns: 1fr; } }
+  .spec-block h3 {
+    font-size: .72rem; font-weight: 500; letter-spacing: .15em; text-transform: uppercase;
+    color: var(--navy-60); margin-bottom: 12px;
+  }
+  .spec-block .spec-table { width: 100%; }
+  .spec-block .spec-table th { width: 48%; }
+
+  /* Platzhalter fuer die Massskizze neben den Kernwerten.
+     Der globale .img-placeholder ist auf kurze Versalien-Labels ausgelegt,
+     hier steht ein erklaerender Merkzettel drin: also Grossbuchstaben und
+     Sperrung zuruecknehmen und linksbuendig setzen. */
+  .spec-figure { display: flex; }
+  .spec-figure .img-placeholder {
+    flex: 1; min-height: 320px;
+    text-transform: none; letter-spacing: normal; text-align: left;
+    font-size: .84rem; line-height: 1.5; align-items: flex-start;
+  }
+  .spec-figure .img-placeholder span { padding: 24px 26px; }
+  .spec-figure .img-placeholder strong { color: var(--orange); font-weight: 500; letter-spacing: .1em; text-transform: uppercase; font-size: .72rem; }
+
+  /* ---------- Normen: schlanke Liste statt sechs fetter Karten ---------- */
+  .norm-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0 44px; border-top: 2px solid var(--navy); }
+  @media (max-width: 820px) { .norm-list { grid-template-columns: 1fr; } }
+  .norm-item { border-bottom: 1px solid var(--line); padding: 22px 0 24px; }
+  .norm-item .norm-code { font-size: 1.02rem; font-weight: 500; letter-spacing: -.01em; }
+  .norm-item .norm-title { font-size: .76rem; letter-spacing: .04em; color: var(--navy-60); margin: 3px 0 12px; }
+  .norm-item p { font-size: .89rem; line-height: 1.55; color: var(--navy-80); }
+
+  /* ---------- Steps-Sektion (uebernommen aus home.html) ---------- */
+  .steps-v2 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .step-v2-wrap { display: flex; flex-direction: column; }
+  .step-v2-img { width: 100%; aspect-ratio: 3/2; object-fit: cover; display: block; border: 2px solid var(--navy); border-bottom: none; }
+  .step-v2 { border: 2px solid var(--navy); background: var(--offwhite); padding: 22px 20px; position: relative; flex: 1; }
+  .step-v2-head { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .step-v2 .n { flex-shrink: 0; width: 26px; height: 26px; background: var(--orange); border: 2px solid var(--navy); display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: .82rem; }
+  .step-v2 h3 { font-size: 1rem; font-weight: 500; margin: 0; }
+  .step-v2 p { font-size: .88rem; color: var(--navy-80); }
+  @media (max-width: 860px) { .steps-v2 { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .steps-v2 { grid-template-columns: 1fr; } }
+
+  /* ---------- Schluss-CTA: Text + Bild ----------
+     Kein Rahmen, Bild per position:absolute exakt auf die Texthoehe
+     zugeschnitten (gleiche Technik wie .cta-final-frame auf home.html) */
+  .ctaband-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 48px; align-items: stretch; }
+  .ctaband-image { position: relative; overflow: hidden; min-height: 0; min-width: 0; }
+  .ctaband-image img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+  @media (max-width: 860px) {
+    .ctaband-grid { grid-template-columns: 1fr; }
+    .ctaband-image { aspect-ratio: 16/9; }
+  }
+
+  /* ---------- Use-Case-Kacheln: Abstand statt aneinandergeklebt, AI-Badge ---------- */
+  .app-row + .app-row { border-top-width: 2px; margin-top: 20px; }
+  .app-visual { position: relative; }
+  .app-visual .ai-label {
+    position: absolute; right: 8px; bottom: 8px;
+    width: 34%; height: auto; border: none; display: block;
+  }
+
+  /* ---------- FAQ: keine Hover-/Open-Farbaenderung, immer blauweiss ---------- */
+  .faq-q:hover, .faq-item.open .faq-q { background: var(--offwhite); }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://anoritech.com/#organization",
+  "name": "Anori Tech UG (haftungsbeschränkt)",
+  "url": "https://anoritech.com/",
+  "logo": "https://anoritech.com/assets/logos/anori-black.svg",
+  "email": "team@anoritech.com",
+  "telephone": "+4915167011710",
+  "address": {"@type": "PostalAddress", "streetAddress": "Luruper Hauptstraße 1", "postalCode": "22547", "addressLocality": "Hamburg", "addressCountry": "DE"},
+  "sameAs": ["https://www.linkedin.com/company/anori-tech/"]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Anori Low-Voltage BMS",
+  "category": "Battery Management System",
+  "url": "https://anoritech.com/low-voltage-bms.html",
+  "image": "https://anoritech.com/assets/img/og-low-voltage-bms.jpg",
+  "description": "Das Anori Low-Voltage BMS ist ein konfigurierbares Batteriemanagementsystem für Batteriepacks mit 3 bis 16 Zellen in Serie, bis 48 V Systemspannung und 250 A Dauerstrom. Zellchemie, Schutzparameter und Schnittstellen werden per Software eingestellt, statt pro Projekt neu entwickelt zu werden.",
+  "brand": {"@type": "Brand", "name": "Anori Tech"},
+  "manufacturer": {"@id": "https://anoritech.com/#organization"},
+  "audience": {"@type": "BusinessAudience", "audienceType": "Batteriepack-Hersteller und Systemintegratoren"},
+  "additionalProperty": [
+    {"@type": "PropertyValue", "name": "Zellen in Serie", "value": "3 bis 16"},
+    {"@type": "PropertyValue", "name": "Systemspannung", "value": "bis 48 V nominal (12 V / 24 V / 48 V)"},
+    {"@type": "PropertyValue", "name": "Dauerstrom", "value": "250 A"},
+    {"@type": "PropertyValue", "name": "Pulsstrom", "value": "500 A für 1 s"},
+    {"@type": "PropertyValue", "name": "Zellchemien", "value": "LFP, NMC, LTO, NCA, Natrium-Ionen; Algorithmus chemie-agnostisch"},
+    {"@type": "PropertyValue", "name": "Aktives Zellbalancing", "value": "bis 2,5 A"},
+    {"@type": "PropertyValue", "name": "Passives Zellbalancing", "value": "bis 50 mA"},
+    {"@type": "PropertyValue", "name": "Schnittstellen", "value": "CAN 2.0B, VE.Can, LIN, RS485, BLE, WLAN, LTE NB-IoT / LTE-M, GNSS"},
+    {"@type": "PropertyValue", "name": "Strommessgenauigkeit", "value": "< 100 mA"},
+    {"@type": "PropertyValue", "name": "SoC-Genauigkeit", "value": "< 2 %"},
+    {"@type": "PropertyValue", "name": "Abmessungen", "value": "150 x 90 x 18 mm"},
+    {"@type": "PropertyValue", "name": "Temperaturbereich", "value": "-30 °C bis +60 °C"},
+    {"@type": "PropertyValue", "name": "Lebensdauer", "value": "10 Jahre"}
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Welche Zellchemien unterstützt das Anori Low-Voltage BMS?",
+      "acceptedAnswer": {"@type": "Answer", "text": "LFP, NMC, LTO, NCA und Natrium-Ionen. Der Algorithmus zur Zustandsschätzung arbeitet chemie-agnostisch: Er nutzt eine mehrstufige Per-Cell State Estimation statt einer auf eine Chemie festgelegten Spannungskennlinie. Eine neue Zellchemie braucht deshalb einen neuen Parametersatz, keine neue Firmware."}
+    },
+    {
+      "@type": "Question",
+      "name": "Welche Spannungen und Ströme deckt das BMS ab?",
+      "acceptedAnswer": {"@type": "Answer", "text": "3 bis 16 Zellen in Serie, also Batteriepacks mit 12 V, 24 V und 48 V Systemspannung. Der Dauerstrom liegt bei 250 A, Pulse bis 500 A werden für eine Sekunde abgedeckt. Module lassen sich parallel schalten, in Serie sind bis zu vier Module möglich."}
+    },
+    {
+      "@type": "Question",
+      "name": "Welche Schnittstellen und Kommunikationsprotokolle bietet das BMS?",
+      "acceptedAnswer": {"@type": "Answer", "text": "CAN 2.0B, VE.Can für die Victron-Integration, LIN, RS485, Bluetooth Low Energy (LE 5.0), WLAN sowie LTE NB-IoT und LTE-M für die Anbindung ohne lokales Netz. Für Ortung und Zeitbasis steht GNSS zur Verfügung. Welche Schnittstellen bestückt und freigeschaltet werden, legen Sie in der Konfiguration fest."}
+    },
+    {
+      "@type": "Question",
+      "name": "Wie genau sind Strommessung und Ladezustandsschätzung?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Die Strommessung arbeitet mit einer Genauigkeit von unter 100 mA, die Ladezustandsschätzung liegt unter 2 Prozent Abweichung. Möglich wird das über eine mehrstufige Per-Cell State Estimation, die auch bei der flachen Spannungskennlinie von LFP belastbar bleibt."}
+    },
+    {
+      "@type": "Question",
+      "name": "Wie balanciert das BMS die Zellen?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Aktiv und passiv, je nach Auslegung des Batteriepacks. Aktives Balancing schiebt Ladung zwischen den Zellen um, mit bis zu 2,5 A. Passives Balancing gleicht mit bis zu 50 mA über Widerstände aus."}
+    },
+    {
+      "@type": "Question",
+      "name": "Ist das Anori BMS für Marine-Anwendungen geeignet?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Ja, das BMS wird für Marine-Anwendungen konfiguriert und ist auf die Anforderungen von ISO 23625 für Lithium-Ionen-Batteriesysteme auf kleinen Wasserfahrzeugen ausgelegt. Über VE.Can lässt es sich direkt in Victron-Installationen einbinden. Die Konformität nach ISO 23625 ist in Vorbereitung."}
+    },
+    {
+      "@type": "Question",
+      "name": "Kann ich das BMS in ein bestehendes System integrieren?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Ja. Schnittstellen, Protokolle und Schutzparameter werden bei der Konfiguration festgelegt, damit das BMS zu Ihrer Systemarchitektur passt. CAN 2.0B ist Standard, VE.Can, LIN, RS485, BLE, WLAN und LTE kommen je nach Konfiguration dazu."}
+    },
+    {
+      "@type": "Question",
+      "name": "Wie schnell bekomme ich einen einsatzfähigen Prototyp?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Nach der Konfiguration erhalten Sie das Angebot innerhalb von 24 Stunden und den Prototyp in 10 Tagen. Anpassungen nach dem ersten Test laufen über die Software-Konfiguration und erfordern keine neue Hardware-Runde."}
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": "https://anoritech.com/low-voltage-bms.html#webpage",
+  "url": "https://anoritech.com/low-voltage-bms.html",
+  "name": "Low-Voltage BMS: 12V, 24V, 48V bis 250 A konfigurierbar",
+  "isPartOf": {"@id": "https://anoritech.com/#website"},
+  "about": {"@id": "https://anoritech.com/#organization"},
+  "primaryImageOfPage": "https://anoritech.com/assets/img/og-low-voltage-bms.jpg",
+  "inLanguage": "de-DE",
+  "datePublished": "2026-08-14",
+  "dateModified": "2026-08-14"
+}
+</script>
+<link rel="alternate" hreflang="de" href="https://anoritech.com/low-voltage-bms.html">
+<link rel="alternate" hreflang="en" href="https://anoritech.com/en/low-voltage-bms.html">
+<link rel="alternate" hreflang="x-default" href="https://anoritech.com/low-voltage-bms.html">
+</head>
+<body>
+
+<a class="skip-link" href="#main" data-i18n="a11y.skip">Zum Inhalt springen</a>
+
+<div class="nav-backdrop" id="nav-backdrop"></div>
+
+<nav id="nav-menu" aria-label="Hauptnavigation" data-i18n-attr="aria-label:nav.aria.main">
+  <button class="nav-close" aria-label="Menü schließen" data-i18n-attr="aria-label:nav.aria.close">&times;</button>
+  <div class="nav-label" data-i18n="nav.label">Menü</div>
+  <a class="nav-link" href="/" data-i18n="nav.home">Home</a>
+  <a class="nav-link active" href="low-voltage-bms.html" data-i18n="nav.lv">Low-Voltage BMS</a>
+  <a class="nav-link" href="vision-team.html" data-i18n="nav.vision">Vision &amp; Team</a>
+  <a class="nav-link" href="https://nice-channel-658.notion.site/Careers-at-Anori-Tech-3834b6f765ee809885d5fef8bb0c7580" target="_blank" rel="noopener"><span data-i18n="nav.career">Karriere</span></a>
+  <div class="nav-cta"><a class="btn" href="konfigurieren.html" data-i18n="cta.configure">BMS konfigurieren</a></div>
+  <div class="nav-meta">
+    <a href="mailto:team@anoritech.com"><span>team@anoritech.com</span></a>
+    <a href="tel:+4915167011710"><span>+49 151 6701 1710</span></a>
+  </div>
+</nav>
+
+<header id="hdr">
+  <div class="wrap hdr-inner">
+    <a class="hdr-logo" href="/" aria-label="Anori Tech, zur Startseite" data-i18n-attr="aria-label:a11y.logohome">
+      <img class="logo-dark" src="assets/logos/anori-black.svg" alt="Anori Tech" width="130" height="30" loading="eager" decoding="async">
+      <img class="logo-light" src="assets/logos/anori-white.svg" alt="Anori Tech" width="130" height="30" loading="eager" decoding="async">
+    </a>
+    <div class="hdr-right">
+      <a class="btn btn-sm" href="konfigurieren.html" data-i18n="cta.configure2">BMS konfigurieren</a>
+      <a class="lang-btn" href="en/low-voltage-bms.html" hreflang="en" aria-label="Switch to English">EN</a>
+      <button class="burger-btn" id="burger-btn" aria-label="Menü öffnen" data-i18n-attr="aria-label:nav.aria.open" aria-expanded="false" aria-controls="nav-menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ══════════ 1 · HERO ══════════ -->
+  <section class="hero grid-bg">
+    <div class="wrap hero-grid">
+      <div class="solid">
+        <h1 data-i18n="hero.h1">Das konfigurierbare BMS bis 48 V.</h1>
+        <p class="lead" data-i18n="hero.lead">3 bis 16 Zellen, bis 250 A Dauerstrom. Zellchemie, Schutzparameter und Schnittstellen werden eingestellt, nicht neu entwickelt.</p>
+        <div class="hero-btns">
+          <a class="btn" href="konfigurieren.html" data-i18n="cta.configure3">BMS konfigurieren</a>
+          <a class="btn btn-ghost" href="#datenblatt" data-i18n="lv.hero.btn2">Technische Daten</a>
+        </div>
+      </div>
+      <div class="hero-visual framed">
+        <img src="assets/img/header_low-voltage-bms.webp" alt="Anori Low-Voltage BMS im Labortest, angeschlossen an Oszilloskop und Messspitzen" width="1600" height="1200" fetchpriority="high" loading="eager" decoding="async" data-i18n-attr="alt:alt.header-bms-blue-sky">
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ 2 · STAKES ══════════ -->
+  <section class="section stakes-band grid-bg-navy on-navy">
+    <div class="wrap solid">
+      <p class="lead" style="max-width:78ch;" data-i18n="lv.stakes">In <strong>Drohnen</strong>, <strong>Robotern</strong>, <strong>Booten</strong>, <strong>Off-Grid-Speichern</strong> und <strong>Elektrowerkzeugen</strong> entscheidet das BMS über Zuverlässigkeit, Sicherheit und Zulassung. Passt es nicht zur Zellchemie und zur geltenden Norm, hilft auch die beste Zelle im Batteriepack nicht weiter.</p>
+    </div>
+  </section>
+
+  <!-- ══════════ 3 · DAS PRODUKT ══════════ -->
+  <section class="section anchor" id="produkt">
+    <div class="wrap">
+      <div class="section-head fi">
+        <span class="eyebrow" data-i18n="lv.prod.eyebrow">Das Produkt</span>
+        <h2 data-i18n="lv.prod.h2">Ein BMS, das zu Ihrem Batteriepack passt.</h2>
+      </div>
+
+      <div class="fi solid" style="max-width:78ch;">
+        <p class="lead" data-i18n="lv.prod.p1"><strong>Das Anori Low-Voltage BMS ist ein konfigurierbares Batteriemanagementsystem für Batteriepacks mit 3 bis 16 Zellen in Serie, und bis zu 250 A Dauerstrom.</strong></p>
+      </div>
+
+      <!-- Beschriftete Prinzipgrafik. Der Text steckt IM SVG, deshalb liegt die
+           englische Fassung als eigene Datei daneben und wird per data-i18n-attr
+           getauscht, genauso wie bei den Grafiken auf home.html. -->
+      <figure class="prod-figure fi solid">
+        <img src="assets/img/svg/BMS-abstract.svg" alt="Anori Low-Voltage BMS mit beschrifteten Kernmerkmalen: ein Algorithmus für alle Zellchemien, vorzertifizierte Module, konfigurierbare Systemarchitektur sowie Optimierung durch Datenerfassung und OTA-Updates" width="3579" height="1279" loading="lazy" data-i18n-attr="src:lv.prod.svg.src,alt:lv.prod.svg.alt" decoding="async">
+        <figcaption data-i18n="lv.imgcaption">Die Kernmerkmale des Anori Low-Voltage BMS im Überblick</figcaption>
+      </figure>
+
+
+      <div class="fi solid" style="max-width:78ch;margin-top:44px;">
+        <p style="color:var(--navy-80);" data-i18n="lv.prod.p2">Es überwacht jede einzelne Zelle, steuert Laden und Entladen und schützt das Batteriepack vor Überlast, Tiefentladung und Überhitzung. Der Unterschied zu anderen Systemen liegt in der Architektur: Sicherheitslogik, Zustandsschätzung, Balancing, Kommunikation und Diagnose sind bei uns eigenständige, bereits validierte Funktionsbausteine. Für Ihr Projekt setzen wir daraus die passende Kombination zusammen, statt ein bestehendes System notdürftig an Ihre Anwendung anzupassen. Sie bekommen dadurch ein BMS, das exakt auf Ihr Batteriepack zugeschnitten ist, inklusive der Prüfnachweise, die Ihre Zertifizierung tragen. In Tagen statt Monaten, auch bei kleinen Serien.</p>
+        <p style="margin-top:18px;color:var(--navy-80);" data-i18n="lv.prod.p3">Sie legen fest, was Ihr Batteriepack braucht: Zellchemie, Spannungslage, Schutzschwellen, Balancing-Verhalten, Schnittstellen und die für Ihre Anwendung geltenden Normen. Daraus stellen wir Ihr BMS aus geprüften Bausteinen zusammen, jeder mit eigener Testsuite und Validierungsnachweis. Weil unsere Bausteinbibliothek mit jedem Projekt wächst, wird die Anpassung mit jedem Kunden schneller und günstiger, statt jedes Mal bei null anzufangen. Ändert sich Ihre Anforderung nach dem ersten Test, bekommen Sie die angepasste Version in kürzester Zeit zurück, nicht nach der nächsten Entwicklungsrunde.</p>
+      </div>
+
+      <div class="g3 fi" style="margin-top:56px;">
+        <div class="card card-lightblue">
+          <div class="card-num">01</div>
+          <h3 data-i18n="lv.prod.1.h">Ein Algorithmus für jede Zellchemie</h3>
+          <p data-i18n="lv.prod.1.p">Im Kern arbeitet unsere proprietäre Anori-Algorithmik: eine mehrstufige Zustandsschätzung, die jede Zelle einzeln bewertet, statt sich auf feste Spannungskennlinien zu verlassen. Ein chemiespezifischer Parametersatz stellt den Algorithmus auf Ihre Zelle ein. LFP, NMC, LTO, NCA und Natrium-Ionen laufen auf derselben Firmware. Die SoC-Abweichung bleibt unter 2 %.</p>
+        </div>
+        <div class="card card-lightblue">
+          <div class="card-num">02</div>
+          <h3 data-i18n="lv.prod.2.h">Passgenau statt Kompromiss</h3>
+          <p data-i18n="lv.prod.2.p">Sie geben Ihre Anforderungen an und erhalten direkt ein BMS, das dazu passt: Schutzgrenzen, Kommunikationsprotokolle, Funktionsumfang und Normen genau für Ihre Anwendung. Kein Standardsystem, mit dem Sie sich arrangieren müssen, und keine Eigenentwicklung über Monate.</p>
+        </div>
+        <div class="card card-lightblue">
+          <div class="card-num">03</div>
+          <h3 data-i18n="lv.prod.3.h">Vernetzt und aktualisierbar</h3>
+          <p data-i18n="lv.prod.3.p">Telemetrie optional über CAN, RS485, Bluetooth, WLAN oder LTE, dazu konfigurierbares Event-Logging und automatisierte Over-the-Air-Updates. Wenn Sie die Anbindung nutzen, sehen Sie über die gesamte Lebensdauer, wie Ihre Batteriepacks im Feld tatsächlich beansprucht werden, als Grundlage für Garantieabwicklung, Ferndiagnose und Lebensdauerberichte.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ 4 · DATENBLATT ══════════ -->
+
+  <!-- ============================================================
+       NEU (GEO): Definitionssektion.
+       Zweck: die Frage "Was ist ein Batteriemanagementsystem?" wird
+       sowohl bei Google als auch in ChatGPT/Perplexity sehr haeufig
+       gestellt. Wer sie sauber beantwortet, wird als Quelle zitiert.
+       Aufbau nach Zitierlogik: Definition in Satz 1, danach ein
+       geschlossener Block von ~150 Woertern, der auch ohne den Rest
+       der Seite verstaendlich ist.
+       ============================================================ -->
+  <section class="section grid-bg anchor" id="was-ist-ein-bms">
+    <div class="wrap">
+      <div class="section-head fi">
+        <div class="eyebrow" data-i18n="lv.basics.eyebrow">Grundlagen</div>
+        <h2 data-i18n="lv.basics.h2">Was ist ein Batteriemanagementsystem?</h2>
+      </div>
+
+      <!-- Erster Block: Text links, Bild rechts -->
+      <div class="g-split fi" style="margin-bottom:64px;">
+        <div class="solid">
+          <p class="lead" data-i18n="lv.basics.p1"><strong>Ein Batteriemanagementsystem (BMS) ist die Elektronik, die einen Lithium-Ionen-Batteriepack überwacht, schützt und steuert.</strong></p>
+          <p style="margin-top:18px;color:var(--navy-80);" data-i18n="lv.basics.p2">Es misst Spannung, Strom und Temperatur jeder Zelle, schätzt Ladezustand (State of Charge) und Alterungszustand (State of Health), gleicht Ladungsunterschiede zwischen den Zellen aus und trennt das Batteriepack ab, bevor Überladung, Tiefentladung, Kurzschluss oder Übertemperatur es beschädigen. Ohne BMS ist ein Lithium-Batteriepack weder sicher noch normkonform in Verkehr zu bringen.</p>
+          <p style="margin-top:18px;color:var(--navy-80);" data-i18n="lv.basics.p3">Für Batteriepack-Hersteller ist das BMS damit die Komponente, die über Sicherheit, Zertifizierbarkeit und nutzbare Kapazität entscheidet. Sie ist zugleich die Komponente, die am schwersten zu beschaffen ist: Standardsysteme lassen sich nicht an neue Zellchemien oder Schnittstellen anpassen, und eine Eigenentwicklung dauert typischerweise sechs bis zwölf Monate. Genau diese Lücke schließt das Anori Low-Voltage BMS, indem es die Anpassung von der Entwicklung in die Konfiguration verlagert.</p>
+        </div>
+
+        <div class="framed"><img src="assets/img/stefan-looks-at-bms.webp" alt="Stefan im Anori-Labor bei der Prüfung des Low-Voltage BMS am Messplatz, angeschlossen an den Zellstack" width="1600" height="1067" loading="lazy" decoding="async" data-i18n-attr="alt:alt.stefan-lab"></div>
+      </div>
+
+      <!-- Zweiter Block: Bild links, Text rechts -->
+      <div class="g-split fi">
+        <div class="framed"><svg viewBox="0 0 780 570" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagramm: Zellspannung einer LFP-Zelle über den Ladezustand, mit nahezu flachem Verlauf zwischen 20 und 80 Prozent" data-i18n-attr="aria-label:lv.chart.svg.alt">
+          <title data-i18n="lv.chart.svg.title">Spannungskurve einer LFP-Zelle über den Ladezustand</title>
+          <rect x="228.8" y="22" width="386.4" height="476" fill="var(--lightblue)" opacity="0.55"></rect>
+          <g stroke="var(--line)" stroke-width="1">
+            <line x1="100" y1="22.0" x2="744" y2="22.0"></line>
+            <line x1="100" y1="141.0" x2="744" y2="141.0"></line>
+            <line x1="100" y1="260.0" x2="744" y2="260.0"></line>
+            <line x1="100" y1="379.0" x2="744" y2="379.0"></line>
+            <line x1="100" y1="498.0" x2="744" y2="498.0"></line>
+          </g>
+          <line x1="100" y1="22" x2="100" y2="498" stroke="var(--navy)" stroke-width="2"></line>
+          <line x1="100" y1="498" x2="744" y2="498" stroke="var(--navy)" stroke-width="2"></line>
+          <path d="M 744.0 486.1 L 741.3 452.4 L 738.6 423.8 L 736.0 402.9 L 733.3 385.4 L 730.6 370.2 L 727.9 357.1 L 725.2 345.5 L 722.5 335.1 L 719.9 325.9 L 717.2 317.6 L 714.5 310.0 L 711.8 302.8 L 709.1 295.9 L 706.4 289.1 L 703.8 282.6 L 701.1 276.5 L 698.4 270.8 L 695.7 265.5 L 693.0 260.9 L 690.3 256.6 L 687.6 252.5 L 685.0 248.6 L 682.3 244.8 L 679.6 241.3 L 676.9 238.1 L 674.2 235.2 L 671.5 232.6 L 668.9 230.5 L 666.2 228.7 L 663.5 227.2 L 660.8 225.8 L 658.1 224.4 L 655.5 223.2 L 652.8 222.0 L 650.1 220.9 L 647.4 219.9 L 644.7 218.9 L 642.0 218.0 L 639.4 217.2 L 636.7 216.5 L 634.0 215.9 L 631.3 215.3 L 628.6 214.9 L 625.9 214.4 L 623.2 214.0 L 620.6 213.7 L 617.9 213.3 L 615.2 212.9 L 612.5 212.6 L 609.8 212.2 L 607.1 211.9 L 604.5 211.6 L 601.8 211.3 L 599.1 211.0 L 596.4 210.8 L 593.7 210.5 L 591.0 210.3 L 588.4 210.0 L 585.7 209.8 L 583.0 209.6 L 580.3 209.4 L 577.6 209.2 L 575.0 209.0 L 572.3 208.8 L 569.6 208.6 L 566.9 208.5 L 564.2 208.3 L 561.5 208.2 L 558.9 208.0 L 556.2 207.9 L 553.5 207.8 L 550.8 207.6 L 548.1 207.5 L 545.4 207.4 L 542.8 207.3 L 540.1 207.2 L 537.4 207.1 L 534.7 207.0 L 532.0 206.9 L 529.3 206.8 L 526.6 206.7 L 524.0 206.6 L 521.3 206.5 L 518.6 206.4 L 515.9 206.4 L 513.2 206.3 L 510.5 206.2 L 507.9 206.1 L 505.2 206.1 L 502.5 206.0 L 499.8 205.9 L 497.1 205.8 L 494.5 205.8 L 491.8 205.7 L 489.1 205.6 L 486.4 205.6 L 483.7 205.5 L 481.0 205.5 L 478.4 205.4 L 475.7 205.3 L 473.0 205.3 L 470.3 205.2 L 467.6 205.2 L 464.9 205.1 L 462.2 205.0 L 459.6 205.0 L 456.9 204.9 L 454.2 204.9 L 451.5 204.8 L 448.8 204.7 L 446.1 204.7 L 443.5 204.6 L 440.8 204.6 L 438.1 204.5 L 435.4 204.4 L 432.7 204.4 L 430.0 204.3 L 427.4 204.2 L 424.7 204.1 L 422.0 204.1 L 419.3 204.0 L 416.6 203.9 L 413.9 203.9 L 411.3 203.8 L 408.6 203.7 L 405.9 203.6 L 403.2 203.6 L 400.5 203.5 L 397.9 203.4 L 395.2 203.4 L 392.5 203.3 L 389.8 203.2 L 387.1 203.2 L 384.4 203.1 L 381.8 203.0 L 379.1 203.0 L 376.4 202.9 L 373.7 202.8 L 371.0 202.8 L 368.3 202.7 L 365.6 202.6 L 363.0 202.6 L 360.3 202.5 L 357.6 202.4 L 354.9 202.3 L 352.2 202.3 L 349.6 202.2 L 346.9 202.1 L 344.2 202.1 L 341.5 202.0 L 338.8 201.9 L 336.1 201.8 L 333.4 201.8 L 330.8 201.7 L 328.1 201.6 L 325.4 201.5 L 322.7 201.5 L 320.0 201.4 L 317.4 201.3 L 314.7 201.2 L 312.0 201.1 L 309.3 201.0 L 306.6 201.0 L 303.9 200.9 L 301.2 200.8 L 298.6 200.7 L 295.9 200.6 L 293.2 200.5 L 290.5 200.4 L 287.8 200.3 L 285.1 200.2 L 282.5 200.1 L 279.8 200.0 L 277.1 199.9 L 274.4 199.8 L 271.7 199.8 L 269.1 199.7 L 266.4 199.6 L 263.7 199.5 L 261.0 199.4 L 258.3 199.3 L 255.6 199.2 L 252.9 199.1 L 250.3 199.0 L 247.6 198.8 L 244.9 198.7 L 242.2 198.6 L 239.5 198.5 L 236.8 198.4 L 234.2 198.2 L 231.5 198.1 L 228.8 198.0 L 226.1 197.8 L 223.4 197.7 L 220.8 197.5 L 218.1 197.3 L 215.4 197.2 L 212.7 197.0 L 210.0 196.8 L 207.3 196.6 L 204.7 196.4 L 202.0 196.2 L 199.3 196.0 L 196.6 195.7 L 193.9 195.5 L 191.2 195.2 L 188.6 194.9 L 185.9 194.5 L 183.2 194.1 L 180.5 193.7 L 177.8 193.2 L 175.1 192.7 L 172.4 192.2 L 169.8 191.6 L 167.1 190.9 L 164.4 190.2 L 161.7 189.5 L 159.0 188.7 L 156.3 187.9 L 153.7 187.0 L 151.0 186.0 L 148.3 184.8 L 145.6 183.3 L 142.9 181.6 L 140.2 179.5 L 137.6 177.2 L 134.9 174.7 L 132.2 172.0 L 129.5 169.1 L 126.8 166.1 L 124.2 162.8 L 121.5 159.0 L 118.8 154.6 L 116.1 149.7 L 113.4 144.4 L 110.7 138.7 L 108.0 132.6 L 105.4 126.1 L 102.7 119.4 L 100.0 112.4" fill="none" stroke="var(--orange)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
+          <g fill="var(--navy-60)" font-size="18" text-anchor="end">
+            <text data-i18n="lv.chart.y1" x="92" y="27.0">4,0 V</text>
+            <text data-i18n="lv.chart.y2" x="92" y="146.0">3,5 V</text>
+            <text data-i18n="lv.chart.y3" x="92" y="265.0">3,0 V</text>
+            <text data-i18n="lv.chart.y4" x="92" y="384.0">2,5 V</text>
+            <text data-i18n="lv.chart.y5" x="92" y="503.0">2,0 V</text>
+          </g>
+          <g fill="var(--navy-60)" font-size="18" text-anchor="middle">
+            <text data-i18n="lv.chart.x1" x="100.0" y="530">100 %</text>
+            <text data-i18n="lv.chart.x2" x="261.0" y="530">75 %</text>
+            <text data-i18n="lv.chart.x3" x="422.0" y="530">50 %</text>
+            <text data-i18n="lv.chart.x4" x="583.0" y="530">25 %</text>
+            <text data-i18n="lv.chart.x5" x="744.0" y="530">0 %</text>
+          </g>
+          <text data-i18n="lv.chart.xaxis" x="422.0" y="566" text-anchor="middle" fill="var(--navy)" font-size="20" font-weight="500">Ladezustand (SoC)</text>
+          <g transform="translate(34,260.0) rotate(-90)">
+            <text data-i18n="lv.chart.yaxis" x="0" y="0" text-anchor="middle" fill="var(--navy)" font-size="20" font-weight="500">Zellspannung (V)</text>
+          </g>
+          <text data-i18n="lv.chart.band" x="422.0" y="52" text-anchor="middle" fill="var(--navy-80)" font-size="17" font-weight="500">Nahezu flach: 20&ndash;80 % SoC</text>
+        </svg></div>
+
+        <div class="solid">
+          <h3 style="margin-bottom:14px;" data-i18n="lv.basics.h3">Warum ist die Ladezustandsschätzung bei LFP besonders schwierig?</h3>
+          <p style="color:var(--navy-80);" data-i18n="lv.basics.p4"><strong>Weil LFP-Zellen über weite Teile ihres Ladebereichs eine nahezu flache Spannungskennlinie haben.</strong> Zwischen etwa 20 und 80 Prozent Ladezustand ändert sich die Zellspannung nur um wenige Millivolt. Ein rein spannungsbasiertes Schätzverfahren, wie es bei NMC noch funktioniert, kann in diesem Bereich nicht mehr zuverlässig unterscheiden, ob ein Batteriepack halb oder fast voll ist. In der Praxis führt das zu Restlaufzeitangaben, die um zweistellige Prozentwerte danebenliegen.</p>
+          <p style="margin-top:18px;color:var(--navy-80);" data-i18n="lv.basics.p5">Das Anori BMS löst das über eine mehrstufige Per-Cell State Estimation: Statt einer festen Spannungskennlinie kombiniert der Algorithmus Messwerte jeder einzelnen Zelle über mehrere Stufen und bleibt dadurch chemie-agnostisch. In typischen Anwendungsszenarien liegt die Abweichung der Ladezustandsschätzung unter 2 Prozent. Eine neue Zellchemie benötigt deshalb nur einen neuen Parametersatz statt einer neuen Firmware.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section grid-bg anchor" id="datenblatt">
+    <div class="wrap">
+      <div class="section-head solid fi">
+        <span class="eyebrow" data-i18n="lv.data.eyebrow">Datenblatt</span>
+        <h2 data-i18n="lv.data.h2">Technische Kennwerte der Anori Plattform</h2>
+        <p data-i18n="lv.data.lead">Die folgenden Angaben zeigen den Funktionsumfang der Anori Plattform in ihrer aktuellen Ausbaustufe. Für Ihr Batteriepack wählen Sie gezielt die Funktionen und Schnittstellen aus, die Ihre Anwendung benötigt. Die aufgeführten Werte und Features sind daher optionale Konfigurationsmöglichkeiten und nicht automatisch Bestandteil jeder BMS-Konfiguration.</p>
+      </div>
+
+      <div class="g-split fi" style="align-items:stretch;">
+        <table class="spec-table">
+          <caption class="visually-hidden" style="position:absolute;left:-9999px;" data-i18n="lv.spec.caption">Kernwerte des Anori Low-Voltage BMS</caption>
+          <tbody>
+            <tr><th scope="row" data-i18n="lv.core.1k">Zellen in Serie</th><td data-i18n="lv.core.1v">3 bis 16</td></tr>
+            <tr><th scope="row" data-i18n="lv.core.2k">Systemspannung</th><td data-i18n="lv.core.2v">bis 48 V nominal</td></tr>
+            <tr><th scope="row" data-i18n="lv.core.3k">Dauerstrom</th><td data-i18n="lv.core.3v">250 A</td></tr>
+            <tr><th scope="row" data-i18n="lv.core.4k">Pulsstrom</th><td data-i18n="lv.core.4v">500 A für 1 s</td></tr>
+            <tr><th scope="row" data-i18n="lv.core.5k">Zellchemien</th><td data-i18n="lv.core.5v">LFP, NMC, LTO, NCA, Natrium-Ionen</td></tr>
+            <tr><th scope="row" data-i18n="lv.core.6k">Balancing</th><td data-i18n="lv.core.6v">aktiv bis 2,5 A, passiv bis 50 mA</td></tr>
+            <tr><th scope="row" data-i18n="lv.core.7k">SoC-Genauigkeit</th><td data-i18n="lv.core.7v">&lt; 2 %</td></tr>
+            <tr><th scope="row" data-i18n="lv.core.8k">Abmessungen</th><td data-i18n="lv.core.8v">150 &times; 90 &times; 18 mm</td></tr>
+          </tbody>
+        </table>
+
+        <div class="spec-figure">
+          <div class="framed"><img src="assets/img/bms-red.webp" alt="Technische Darstellung der Anori Low-Voltage BMS Platine mit Bauteilen und Leiterbahnen" width="1175" height="753" loading="lazy" decoding="async" data-i18n-attr="alt:alt.bms-red"></div>
+        </div>
+      </div>
+
+      <details class="spec-more fi">
+        <summary>
+          <span data-i18n="lv.data.toggle">Alle technischen Daten anzeigen</span>
+          <span class="sm-icon" aria-hidden="true"></span>
+        </summary>
+        <div class="spec-more-body">
+          <p class="small muted" style="margin:0 0 28px;max-width:78ch;" data-i18n="lv.data.optnote">Werte und Funktionen sind optional und werden auf die Anforderungen Ihres Batteriepacks abgestimmt.</p>
+          <div class="spec-grid">
+
+            <div class="spec-block">
+              <h3 data-i18n="lv.data.g1">Zellen und Batteriepack</h3>
+              <table class="spec-table">
+                <tbody>
+                  <tr><th scope="row" data-i18n="lv.d.1k">Zellspannungserfassung</th><td data-i18n="lv.d.1v">3 bis 16 Kanäle</td></tr>
+                  <tr><th scope="row" data-i18n="lv.d.2k">Parallelbetrieb</th><td data-i18n="lv.d.2v">unterstützt</td></tr>
+                  <tr><th scope="row" data-i18n="lv.d.3k">Serienbetrieb</th><td data-i18n="lv.d.3v">bis zu 4 Module</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="spec-block">
+              <h3 data-i18n="lv.data.g2">Messung und Zustandsschätzung</h3>
+              <table class="spec-table">
+                <tbody>
+                  <tr><th scope="row" data-i18n="lv.d.4k">Strommessgenauigkeit</th><td data-i18n="lv.d.4v">&lt; 100 mA</td></tr>
+                  <tr><th scope="row" data-i18n="lv.d.5k">Verfahren</th><td data-i18n="lv.d.5v">mehrstufige Per-Cell State Estimation, chemie-agnostisch</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="spec-block">
+              <h3 data-i18n="lv.data.g3">Schutzfunktionen</h3>
+              <table class="spec-table">
+                <tbody>
+                  <tr><th scope="row" data-i18n="lv.d.6k">Zellspannung</th><td data-i18n="lv.d.6v">konfigurierbare Über- und Unterspannungsabschaltung (OVP / UVP)</td></tr>
+                  <tr><th scope="row" data-i18n="lv.d.7k">Packspannung</th><td data-i18n="lv.d.7v">konfigurierbare Über- und Unterspannungsabschaltung (OVP / UVP)</td></tr>
+                  <tr><th scope="row" data-i18n="lv.d.8k">Strom</th><td data-i18n="lv.d.8v">konfigurierbarer Überstrom- und Kurzschlussschutz (OCP / SCP)</td></tr>
+                  <tr><th scope="row" data-i18n="lv.d.9k">Temperatur</th><td data-i18n="lv.d.9v">konfigurierbarer Über- und Untertemperaturschutz (OTP / UTP)</td></tr>
+                  <tr><th scope="row" data-i18n="lv.d.10k">Heizung</th><td data-i18n="lv.d.10v">PWM-Steuerung bis 20 A für Packheizung im Kaltbetrieb</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="spec-block">
+              <h3 data-i18n="lv.data.g4">Schnittstellen und Konnektivität</h3>
+              <table class="spec-table">
+                <tbody>
+                  <tr><th scope="row">CAN</th><td data-i18n="lv.d.11v">CAN 2.0B</td></tr>
+                  <tr><th scope="row" data-i18n="lv.d.12k">Victron-Integration</th><td data-i18n="lv.d.12v">VE.Can</td></tr>
+                  <tr><th scope="row">LIN</th><td data-i18n="lv.d.13v">LIN-Bus</td></tr>
+                  <tr><th scope="row">RS485</th><td data-i18n="lv.d.14v">RS485</td></tr>
+                  <tr><th scope="row" data-i18n="lv.d.15k">Bluetooth</th><td data-i18n="lv.d.15v">Bluetooth Low Energy (LE 5.0)</td></tr>
+                  <tr><th scope="row">WLAN</th><td data-i18n="lv.d.16v">2,4 GHz, IEEE 802.11 b/g/n</td></tr>
+                  <tr><th scope="row" data-i18n="lv.d.17k">Mobilfunk</th><td data-i18n="lv.d.17v">LTE NB-IoT / LTE-M</td></tr>
+                  <tr><th scope="row" data-i18n="lv.d.18k">Ortung</th><td data-i18n="lv.d.18v">GNSS</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="spec-block">
+              <h3 data-i18n="lv.data.g5">Daten und Software</h3>
+              <table class="spec-table">
+                <tbody>
+                  <tr><th scope="row" data-i18n="lv.d.19k">Telemetrie</th><td data-i18n="lv.d.19v">SoC, Zellspannungen, Strom, Temperatur, Statusmeldungen</td></tr>
+                  <tr><th scope="row" data-i18n="lv.d.20k">Event-Logging</th><td data-i18n="lv.d.20v">konfigurierbar</td></tr>
+                  <tr><th scope="row" data-i18n="lv.d.21k">Updates</th><td data-i18n="lv.d.21v">automatisiertes Over-the-Air-Update</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="spec-block">
+              <h3 data-i18n="lv.data.g6">Mechanik und Umgebung</h3>
+              <table class="spec-table">
+                <tbody>
+                  <tr><th scope="row" data-i18n="lv.d.22k">Temperaturbereich</th><td data-i18n="lv.d.22v">&minus;30 °C bis +60 °C</td></tr>
+                  <tr><th scope="row" data-i18n="lv.d.23k">Schutz der Elektronik</th><td data-i18n="lv.d.23v">Schutzlackierung nach IPC-CC-830</td></tr>
+                  <tr><th scope="row" data-i18n="lv.d.24k">Lebensdauer</th><td data-i18n="lv.d.24v">10 Jahre</td></tr>
+                  <tr><th scope="row" data-i18n="lv.d.29k">Elektrische Transienten</th><td data-i18n="lv.d.29v">ISO 7637-2/-3, ISO 16750-2 (Load Dump, Verpolung, Jump Start), LV 148</td></tr>
+                  <tr><th scope="row" data-i18n="lv.d.30k">ESD / Burst / Surge</th><td data-i18n="lv.d.30v">EN 61000-4-2 / -4-4 / -4-5</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="spec-block">
+              <h3 data-i18n="lv.data.g7">Normativer Rahmen</h3>
+              <table class="spec-table">
+                <tbody>
+                  <tr><th scope="row" data-i18n="lv.d.25k">CE-Konformität</th><td data-i18n="lv.d.25v">EMV, Funkanlagen (RED), Batterieverordnung, Cyber Resilience Act</td></tr>
+                  <tr><th scope="row" data-i18n="lv.d.27k">EMV Fahrzeug</th><td data-i18n="lv.d.27v">UN ECE R10</td></tr>
+                  <tr><th scope="row" data-i18n="lv.d.28k">Funktionale Sicherheit</th><td data-i18n="lv.d.28v">In Entwicklung nach IEC 61508 (SIL 2) und ISO 26262 (ASIL C)</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- ══════════ 5 · NORMEN UND ZERTIFIZIERUNG ══════════ -->
+  <section class="section anchor" id="zertifizierung">
+    <div class="wrap">
+      <div class="section-head fi">
+        <span class="eyebrow" data-i18n="lv.cert.eyebrow">Normen &amp; Zertifizierung</span>
+        <h2 data-i18n="lv.cert.h2">Regulatorik von Beginn an mitgedacht</h2>
+        <p class="lead" data-i18n="lv.cert.p1">Zertifiziert wird am Ende Ihr Gesamtsystem, nicht das BMS allein. Unsere Aufgabe ist, dass es diese Prüfung besteht. Das Anori Low-Voltage BMS ist von der ersten Auslegung an auf die Regelwerke ausgerichtet, die in Ihrer Anwendung greifen, und wir testen gegen deren Anforderungen, bevor Ihr Batteriepack in ein Prüflabor geht.</p>
+        <p style="margin-top:18px;color:var(--navy-80);" data-i18n="lv.cert.p2">Zertifizierung ist die Stelle, an der Batterieprojekte die meiste Zeit verlieren, meistens weil erst spät klar wird, welche Regelwerke überhaupt greifen. Deshalb steht das bei uns am Anfang: Sicherheitsanalysen und die Begleitung Ihrer Tests sind ausgewiesene Positionen im Angebot, damit Sie den Aufwand von vornherein kennen und nicht mitten im Projekt neu kalkulieren müssen. Weil die Module der Plattform bereits nach gängigen Normen vorgeprüft sind, prüfen Sie im Projekt das Gesamtsystem und nicht jede Einzelfunktion von vorn. Das Team dahinter kommt aus der Serienentwicklung im Automotive- und Industrieumfeld und ist für diese Normenarbeit entsprechend qualifiziert.</p>
+      </div>
+
+      <table class="status-table fi">
+        <thead>
+          <tr>
+            <th scope="col" data-i18n="lv.cert.col1">Anwendung</th>
+            <th scope="col" data-i18n="lv.cert.col2">Regelwerke, die hier typischerweise greifen</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row" data-i18n="lv.cert.a1">Drohnen &amp; UAV</th>
+            <td data-i18n="lv.cert.n1">EU 2019/945 &amp; 2019/947, EN 4709-001; Defense: IEC 61508, MIL-STD-461/-810</td>
+          </tr>
+          <tr>
+            <th scope="row" data-i18n="lv.cert.a2">Robotik &amp; AGV</th>
+            <td data-i18n="lv.cert.n2">Maschinenverordnung (EU) 2023/1230, ISO 13849 / IEC 62061, IEC 62619</td>
+          </tr>
+          <tr>
+            <th scope="row" data-i18n="lv.cert.a3">Marine</th>
+            <td data-i18n="lv.cert.n3">ISO 23625, Sportbootrichtlinie 2013/53/EU</td>
+          </tr>
+          <tr>
+            <th scope="row" data-i18n="lv.cert.a4">LEV &amp; Sonderfahrzeuge</th>
+            <td data-i18n="lv.cert.n4">UN ECE R136, UN ECE R10, EN 50604-1, ISO 26262</td>
+          </tr>
+          <tr>
+            <th scope="row" data-i18n="lv.cert.a5">Off-Grid &amp; Speicher</th>
+            <td data-i18n="lv.cert.n5">IEC 62619, IEC 63056</td>
+          </tr>
+          <tr>
+            <th scope="row" data-i18n="lv.cert.a6">Elektrowerkzeuge &amp; Geräte</th>
+            <td data-i18n="lv.cert.n6">EN 62841 (Akku-Schutzfunktionen)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="small muted fi solid" style="margin-top:22px;max-width:78ch;" data-i18n="lv.cert.tablenote">Stand: Juli 2026. Diese Zuordnung ist der Ausgangspunkt, nicht das Ergebnis. Für Ihr konkretes Batteriepack hängt es davon ab, wo es verbaut wird und wer es in Verkehr bringt. Genau das klären wir am Anfang eines Projekts, nicht am Ende.</p>
+    </div>
+  </section>
+
+  <!-- ══════════ 6 · PLAN ══════════ -->
+  <section class="section grid-bg">
+    <div class="wrap">
+      <div class="section-head solid fi">
+        <span class="eyebrow" data-i18n="plan.eyebrow">So läuft es ab</span>
+        <h2 data-i18n="plan.h2">Vier Schritte. Ihr fertiges BMS.</h2>
+        <p class="lead" data-i18n="plan.lead">Sie definieren die Anforderungen. Wir liefern ein konfiguriertes, zertifizierungsfähiges BMS und erfassen die Batteriedaten über die gesamte Lebensdauer, damit Sie Ihr Batteriepack weiter verbessern können.</p>
+      </div>
+      <div class="steps-v2 fi">
+        <div class="step-v2-wrap">
+          <img class="step-v2-img" src="assets/img/step1_Konfigurator.webp" alt="Schritt 1: Zellchemie, Spannung und Schnittstellen im Anori-Konfigurator eingeben" loading="lazy" width="1200" height="639" decoding="async" data-i18n-attr="alt:alt.step1-konfigurator">
+          <div class="step-v2">
+            <div class="step-v2-head">
+              <div class="n">1</div>
+              <h3 data-i18n="plan.1.h">Online konfigurieren</h3>
+            </div>
+            <p data-i18n="plan.1.p">Zellchemie, Spannungslage, Schnittstellen und gewünschte Funktionen im Anori-Konfigurator angeben.</p>
+          </div>
+        </div>
+        <div class="step-v2-wrap">
+          <img class="step-v2-img" src="assets/img/step2_adaption.webp" alt="Schritt 2: Anori passt die standardisierte BMS-Plattform an die Konfiguration an" loading="lazy" width="1200" height="800" decoding="async" data-i18n-attr="alt:alt.step2-adaption">
+          <div class="step-v2">
+            <div class="step-v2-head">
+              <div class="n">2</div>
+              <h3 data-i18n="plan.2.h">Wir passen die Plattform an</h3>
+            </div>
+            <p data-i18n="plan.2.p">Ihre Konfiguration wird auf die standardisierte Hardware angewendet. Anpassungen laufen durch unsere Software, nicht über eine neue Entwicklung.</p>
+          </div>
+        </div>
+        <div class="step-v2-wrap">
+          <img class="step-v2-img" src="assets/img/step3_prototyp.webp" alt="Schritt 3: BMS-Prototyp im Anori-Labor im Test, Vorbereitung der Zertifizierung" loading="lazy" width="1200" height="800" decoding="async" data-i18n-attr="alt:alt.step3-prototyp">
+          <div class="step-v2">
+            <div class="step-v2-head">
+              <div class="n">3</div>
+              <h3 data-i18n="plan.3.h">Prototyp &amp; Zertifizierung</h3>
+            </div>
+            <p data-i18n="plan.3.p">Vorqualifizierte Module und Unterstützung bei der Zertifizierung bringen Ihr Batteriepack mit minimalem Aufwand durch die Validierung.</p>
+          </div>
+        </div>
+        <div class="step-v2-wrap">
+          <img class="step-v2-img" src="assets/img/step4_deliver2.webp" alt="Schritt 4: fertiges Anori BMS wird ausgeliefert und im Betrieb weiter verbessert" loading="lazy" width="1200" height="900" decoding="async" data-i18n-attr="alt:alt.step4-deliver2">
+          <div class="step-v2">
+            <div class="step-v2-head">
+              <div class="n">4</div>
+              <h3 data-i18n="plan.4.h">Liefern &amp; weiter verbessern</h3>
+            </div>
+            <p data-i18n="plan.4.p">Die Hardware wird geliefert. Software, Analysen und Updates begleiten Ihre Batterie über 10+ Jahre.</p>
+          </div>
+        </div>
+      </div>
+      <p style="margin-top:32px;" class="fi"><a class="btn" href="konfigurieren.html" data-i18n="cta.configure4">BMS konfigurieren</a></p>
+    </div>
+  </section>
+
+  <!-- ══════════ 7 · ANWENDUNGEN ══════════ -->
+  <section class="section anchor" id="anwendungen">
+    <div class="wrap">
+      <div class="section-head fi">
+        <span class="eyebrow" data-i18n="lv.apps.eyebrow">Anwendungen</span>
+        <h2 data-i18n="lv.apps.h2">Sechs Welten, dieselbe Plattform.</h2>
+        <p data-i18n="lv.apps.lead">Jede Anwendung stellt eigene Anforderungen an Schutzfunktionen, Schnittstellen und Normen. Was sich ändert, ist die Konfiguration, nicht die Hardware.</p>
+      </div>
+
+      <div class="fi">
+        <!-- Drohnen -->
+        <article class="app-row" id="drohnen">
+          <div class="app-visual framed"><img src="assets/img/case-drohnen.webp" alt="Drohne im Flug, Anwendungsfall für das Anori Low-Voltage BMS in Drohnen und UAV" width="900" height="1019" loading="lazy" decoding="async" data-i18n-attr="alt:alt.case-drohnen"><img class="ai-label" src="assets/img/EU-LABEL_AI_GENERATED_black.svg.webp" alt="KI-generiertes Bild" width="960" height="305" loading="lazy" decoding="async" data-i18n-attr="alt:alt.ai-label"></div>
+          <div class="app-body">
+            <span class="app-tag" data-i18n="lv.app.1.tag">Anwendung 01</span>
+            <h3 data-i18n="lv.app.1.h">Drohnen &amp; UAV</h3>
+            <p class="app-label" data-i18n="lv.label.challenge">Die Herausforderung</p>
+            <p class="app-pain" data-i18n="lv.app.1.pain">Jedes Gramm zählt, und die Restlaufzeit muss stimmen, bevor das Gerät startet. Eine falsch geschätzte Restkapazität ist hier kein Komfortproblem, sondern ein Sicherheitsrisiko.</p>
+            <div class="app-fit">
+              <p class="app-label" data-i18n="lv.label.answer">Was Anori liefert</p>
+              <p data-i18n="lv.app.1.fit">Die mehrstufige Per-Cell State Estimation hält die SoC-Abweichung auch bei hohen Entladeraten unter 2 %, die Strommessung arbeitet mit unter 100 mA Genauigkeit. Schutzparameter und Grenzwerte werden per Software auf das jeweilige Flugprofil ausgelegt.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- Robotik -->
+        <article class="app-row" id="robotik">
+          <div class="app-visual framed"><img src="assets/img/case-robotik.webp" alt="Autonomer Transportroboter im Lager, Anwendungsfall für das Anori Low-Voltage BMS in der Robotik" width="900" height="1019" loading="lazy" decoding="async" data-i18n-attr="alt:alt.case-robotik"><img class="ai-label" src="assets/img/EU-LABEL_AI_GENERATED_black.svg.webp" alt="KI-generiertes Bild" width="960" height="305" loading="lazy" decoding="async" data-i18n-attr="alt:alt.ai-label"></div>
+          <div class="app-body">
+            <span class="app-tag" data-i18n="lv.app.2.tag">Anwendung 02</span>
+            <h3 data-i18n="lv.app.2.h">Robotik</h3>
+            <p class="app-label" data-i18n="lv.label.challenge">Die Herausforderung</p>
+            <p class="app-pain" data-i18n="lv.app.2.pain">Hohe Lastspitzen, enge Bauräume, kurze Entwicklungszyklen. Jede Hardware-Revision am Roboter zieht sonst eine BMS-Revision nach sich, und damit einen neuen Testzyklus.</p>
+            <div class="app-fit">
+              <p class="app-label" data-i18n="lv.label.answer">Was Anori liefert</p>
+              <p data-i18n="lv.app.2.fit">250 A Dauerstrom und 500 A Puls decken Antriebs- und Anlaufspitzen mit derselben Platine ab, 150 × 90 × 18 mm passen in enge Bauräume. Ändert sich der Roboter, ändert sich die Konfiguration, nicht die Platine.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- Marine -->
+        <article class="app-row" id="marine">
+          <div class="app-visual framed"><img src="assets/img/case-marine.webp" alt="Segelyacht im Hafen, Anwendungsfall für das Anori Low-Voltage BMS in Marine-Anwendungen" width="900" height="1019" loading="lazy" decoding="async" data-i18n-attr="alt:alt.case-marine"><img class="ai-label" src="assets/img/EU-LABEL_AI_GENERATED_black.svg.webp" alt="KI-generiertes Bild" width="960" height="305" loading="lazy" decoding="async" data-i18n-attr="alt:alt.ai-label"></div>
+          <div class="app-body">
+            <span class="app-tag" data-i18n="lv.app.3.tag">Anwendung 03</span>
+            <h3 data-i18n="lv.app.3.h">Marine</h3>
+            <p class="app-label" data-i18n="lv.label.challenge">Die Herausforderung</p>
+            <p class="app-pain" data-i18n="lv.app.3.pain">An Bord gibt es keine Werkstatt in Reichweite. Salz, Vibration und Dauerbetrieb kommen zusammen, und für Lithium an Bord gelten eigene Normen.</p>
+            <div class="app-fit">
+              <p class="app-label" data-i18n="lv.label.answer">Was Anori liefert</p>
+              <p data-i18n="lv.app.3.fit">Die Auslegung berücksichtigt ISO 23625 für Lithium-Ionen-Batteriesysteme auf kleinen Wasserfahrzeugen. 250 A Dauerstrom decken Antrieb und Hausbatterie ab, über VE.Can bindet sich das BMS direkt in bestehende Victron-Installationen ein, und die Schutzlackierung nach IPC-CC-830 ist auf feuchte Umgebungen ausgelegt.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- LEV -->
+        <article class="app-row" id="lev">
+          <div class="app-visual framed"><img src="assets/img/case-lev.webp" alt="E-Scooter, Anwendungsfall für das Anori Low-Voltage BMS in leichten Elektrofahrzeugen" width="900" height="1019" loading="lazy" decoding="async" data-i18n-attr="alt:alt.case-lev"><img class="ai-label" src="assets/img/EU-LABEL_AI_GENERATED_black.svg.webp" alt="KI-generiertes Bild" width="960" height="305" loading="lazy" decoding="async" data-i18n-attr="alt:alt.ai-label"></div>
+          <div class="app-body">
+            <span class="app-tag" data-i18n="lv.app.4.tag">Anwendung 04</span>
+            <h3 data-i18n="lv.app.4.h">LEV &amp; Sonderfahrzeuge</h3>
+            <p class="app-label" data-i18n="lv.label.challenge">Die Herausforderung</p>
+            <p class="app-pain" data-i18n="lv.app.4.pain">Kurze Modellzyklen, harter Preisdruck, und UN ECE R10 als Pflicht. Eine Eigenentwicklung pro Modell rechnet sich in diesen Stückzahlen nie.</p>
+            <div class="app-fit">
+              <p class="app-label" data-i18n="lv.label.answer">Was Anori liefert</p>
+              <p data-i18n="lv.app.4.fit">Die Pre-Compliance-Arbeit zu UN ECE R10 läuft bereits auf Plattformebene, die funktionale Sicherheit legen wir entlang ISO 26262 aus. CAN 2.0B und LIN binden das BMS in gängige Fahrzeugarchitekturen ein. Pro Modell wird konfiguriert statt entwickelt.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- Off-Grid -->
+        <article class="app-row" id="off-grid">
+          <div class="app-visual framed"><img src="assets/img/case-off-grid.webp" alt="Mobiler Energiespeicher im Freien, Anwendungsfall für das Anori Low-Voltage BMS in Off-Grid-Speichern" width="900" height="1019" loading="lazy" decoding="async" data-i18n-attr="alt:alt.case-off-grid"><img class="ai-label" src="assets/img/EU-LABEL_AI_GENERATED_black.svg.webp" alt="KI-generiertes Bild" width="960" height="305" loading="lazy" decoding="async" data-i18n-attr="alt:alt.ai-label"></div>
+          <div class="app-body">
+            <span class="app-tag" data-i18n="lv.app.5.tag">Anwendung 05</span>
+            <h3 data-i18n="lv.app.5.h">Off-Grid &amp; Speicher</h3>
+            <p class="app-label" data-i18n="lv.label.challenge">Die Herausforderung</p>
+            <p class="app-pain" data-i18n="lv.app.5.pain">Kein Techniker vor Ort, Dauerbetrieb über Jahre, und LFP macht es schwer: Die flache Spannungskurve lässt spannungsbasierte Ladezustandsschätzung ungenau werden.</p>
+            <div class="app-fit">
+              <p class="app-label" data-i18n="lv.label.answer">Was Anori liefert</p>
+              <p data-i18n="lv.app.5.fit">Die mehrstufige Per-Cell State Estimation hält die SoC-Abweichung auch bei flacher LFP-Kennlinie unter 2 %. Damit wird Autonomie kalkulierbar statt geschätzt. LTE NB-IoT und automatisiertes OTA halten den Speicher auch ohne lokales Netz erreichbar und aktuell.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- Powertools -->
+        <article class="app-row" id="powertools">
+          <div class="app-visual framed"><img src="assets/img/powertool.webp" alt="Akkubetriebenes Elektrowerkzeug, Anwendungsfall für das Anori Low-Voltage BMS" width="900" height="1019" loading="lazy" decoding="async" data-i18n-attr="alt:alt.powertool"><img class="ai-label" src="assets/img/EU-LABEL_AI_GENERATED_black.svg.webp" alt="KI-generiertes Bild" width="960" height="305" loading="lazy" decoding="async" data-i18n-attr="alt:alt.ai-label"></div>
+          <div class="app-body">
+            <span class="app-tag" data-i18n="lv.app.6.tag">Anwendung 06</span>
+            <h3 data-i18n="lv.app.6.h">Elektrowerkzeuge</h3>
+            <p class="app-label" data-i18n="lv.label.challenge">Die Herausforderung</p>
+            <p class="app-pain" data-i18n="lv.app.6.pain">Akkus in Elektrowerkzeugen liefern kurze, sehr hohe Stromspitzen beim Anlaufen und Blockieren, dazu kommen Stöße, Staub und Vibration auf der Baustelle. Der Bauraum im Werkzeugakku ist eng, für zusätzliche Elektronik bleibt kaum Platz.</p>
+            <div class="app-fit">
+              <p class="app-label" data-i18n="lv.label.answer">Was Anori liefert</p>
+              <p data-i18n="lv.app.6.fit">500 A Pulsstrom für eine Sekunde decken Anlauf und Blockieren ab, der konfigurierbare Überstrom- und Kurzschlussschutz greift davor. Für kalte Baustellen steuert das BMS eine Packheizung per PWM an. Die kompakte Konfiguration passt in gängige Akku-Formfaktoren, ohne zusätzliches Gewicht.</p>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- FAQ -->
+      <div style="margin-top:64px;" class="anchor" id="faq">
+        <div class="section-head fi">
+          <span class="eyebrow" data-i18n="faq.eyebrow">Häufige Fragen</span>
+          <h2 data-i18n="lv.faq.h2">Technische Fragen zum Low-Voltage BMS.</h2>
+        </div>
+
+        <div class="faq fi">
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false"><span data-i18n="lv.faq.1.q">Welche Zellchemien unterstützt das Anori Low-Voltage BMS?</span><span class="faq-icon" aria-hidden="true"></span></button>
+            <div class="faq-a"><p data-i18n="lv.faq.1.a">LFP, NMC, LTO, NCA und Natrium-Ionen. Der Algorithmus zur Zustandsschätzung arbeitet chemie-agnostisch: Er nutzt eine mehrstufige Per-Cell State Estimation statt einer auf eine Chemie festgelegten Spannungskennlinie. Eine neue Zellchemie braucht deshalb einen neuen Parametersatz, keine neue Firmware.</p></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false"><span data-i18n="lv.faq.2.q">Welche Spannungen und Ströme deckt das BMS ab?</span><span class="faq-icon" aria-hidden="true"></span></button>
+            <div class="faq-a"><p data-i18n="lv.faq.2.a">3 bis 16 Zellen in Serie, also Batteriepacks mit 12 V, 24 V und 48 V Systemspannung. Der Dauerstrom liegt bei 250 A, Pulse bis 500 A werden für eine Sekunde abgedeckt. Module lassen sich parallel schalten, in Serie sind bis zu vier Module möglich. Die Plattformarchitektur ist spannungs-skalierbar angelegt, der Produktfokus liegt heute vollständig im Niedervolt-Bereich.</p></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false"><span data-i18n="lv.faq.3.q">Welche Schnittstellen und Kommunikationsprotokolle bietet das BMS?</span><span class="faq-icon" aria-hidden="true"></span></button>
+            <div class="faq-a"><p data-i18n="lv.faq.3.a">CAN 2.0B, VE.Can für die Victron-Integration, LIN, RS485, Bluetooth Low Energy (LE 5.0), WLAN sowie LTE NB-IoT und LTE-M für die Anbindung ohne lokales Netz. Für Ortung und Zeitbasis steht GNSS zur Verfügung. Welche Schnittstellen bestückt und freigeschaltet werden, legen Sie in der Konfiguration fest.</p></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false"><span data-i18n="lv.faq.4.q">Wie genau sind Strommessung und Ladezustandsschätzung?</span><span class="faq-icon" aria-hidden="true"></span></button>
+            <div class="faq-a"><p data-i18n="lv.faq.4.a">Die Strommessung arbeitet mit einer Genauigkeit von unter 100 mA, die Ladezustandsschätzung liegt unter 2 % Abweichung. Möglich wird das über eine mehrstufige Per-Cell State Estimation, die auch bei der flachen Spannungskennlinie von LFP belastbar bleibt.</p></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false"><span data-i18n="lv.faq.5.q">Wie balanciert das BMS die Zellen?</span><span class="faq-icon" aria-hidden="true"></span></button>
+            <div class="faq-a"><p data-i18n="lv.faq.5.a">Aktiv und passiv, je nach Auslegung des Batteriepacks. Aktives Balancing schiebt Ladung zwischen den Zellen um, mit bis zu 2,5 A, und ist überall dort sinnvoll, wo nutzbare Kapazität und Wirkungsgrad zählen. Passives Balancing gleicht mit bis zu 50 mA über Widerstände aus und reicht für Anwendungen mit geringer Zelldrift aus.</p></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false"><span data-i18n="lv.faq.6.q">Ist das Anori BMS für Marine-Anwendungen geeignet?</span><span class="faq-icon" aria-hidden="true"></span></button>
+            <div class="faq-a"><p data-i18n="lv.faq.6.a">Ja. Das BMS wird für Marine-Anwendungen konfiguriert und ist auf die Anforderungen von ISO 23625 für Lithium-Ionen-Batteriesysteme auf kleinen Wasserfahrzeugen ausgelegt. Über VE.Can lässt es sich direkt in Victron-Installationen einbinden. Welche Regelwerke für Marine-Anwendungen sonst noch greifen, steht unter <a href="#zertifizierung">Normen &amp; Zertifizierung</a>. Den jeweils aktuellen Stand der Konformität geben wir auf Anfrage transparent weiter.</p></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false"><span data-i18n="lv.faq.7.q">Kann ich das BMS in ein bestehendes System integrieren?</span><span class="faq-icon" aria-hidden="true"></span></button>
+            <div class="faq-a"><p data-i18n="lv.faq.7.a">Ja. Schnittstellen, Protokolle und Schutzparameter werden bei der Konfiguration festgelegt, damit das BMS zu Ihrer Systemarchitektur passt. CAN 2.0B ist Standard, VE.Can, LIN, RS485, BLE, WLAN und LTE kommen je nach Konfiguration dazu.</p></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false"><span data-i18n="lv.faq.8.q">Wie schnell bekomme ich einen einsatzfähigen Prototyp?</span><span class="faq-icon" aria-hidden="true"></span></button>
+            <div class="faq-a"><p data-i18n="lv.faq.8.a">Nach der Konfiguration erhalten Sie das Angebot innerhalb von 24 Stunden und den Prototyp in 10 Tagen. Anpassungen nach dem ersten Test laufen über die Software-Konfiguration und erfordern keine neue Hardware-Runde.</p></div>
+          </div>
+        </div>
+      </div>
+
+        <p class="page-updated"><span data-i18n="meta.updated">Zuletzt aktualisiert</span>: <time datetime="2026-08-14" data-i18n="meta.updated.date">14. August 2026</time></p>
+    </div>
+  </section>
+
+  <!-- ══════════ Schluss-CTA ══════════ -->
+  <section class="section section-tight grid-bg-navy on-navy cta-band">
+    <div class="wrap">
+      <div class="ctaband-grid solid">
+        <div>
+          <h2 data-i18n="lv.ctaband.h2">Passt das zu Ihrem Batteriepack?</h2>
+          <p class="lead" data-i18n="lv.ctaband.p">Geben Sie Zellchemie, Spannung und Stromstärke durch. Das Angebot kommt innerhalb von 24 Stunden, der Prototyp in 10 Tagen.</p>
+          <div class="cta-actions">
+            <a class="btn" href="konfigurieren.html" data-i18n="cta.configure5">BMS konfigurieren</a>
+            <a class="btn btn-ghost" href="/#wie-es-funktioniert" data-i18n="lv.ctaband.btn2">Wie die Plattform funktioniert</a>
+          </div>
+          <p class="cta-contact" data-i18n="ctaband.contact">Lieber direkt sprechen? <a href="tel:+4915167011710"><span>+49 151 6701 1710</span></a> oder <a href="mailto:team@anoritech.com"><span>team@anoritech.com</span></a></p>
+        </div>
+        <div class="ctaband-image">
+          <img src="assets/img/box-BMS.webp" alt="Versandfertig verpacktes Anori Low-Voltage BMS im geöffneten Karton" loading="lazy" width="768" height="1024" decoding="async" data-i18n-attr="alt:alt.box-bms">
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer class="site">
+  <div class="wrap">
+    <div class="ft-top">
+      <div class="ft-brand">
+        <img class="ft-logo" src="assets/logos/anori-white.svg" alt="Anori Tech" width="120" height="26" loading="lazy" decoding="async">
+        <p class="ft-tagline" data-i18n="ft.tagline">Das modulare und konfigurierbare BMS aus Hamburg. Geliefert in Tagen, nicht Monaten.</p>
+        <a class="ft-social" href="https://www.linkedin.com/company/anori-tech/" target="_blank" rel="noopener" aria-label="Anori Tech auf LinkedIn" data-i18n-attr="aria-label:alt.linkedin-anori">
+          <img src="assets/logos/linkedin.png" alt="Anori Tech auf LinkedIn" width="26" height="26" loading="lazy" decoding="async" data-i18n-attr="alt:alt.linkedin-anori">
+        </a>
+      </div>
+    </div>
+
+    <div class="ft-cols">
+      <div class="ft-col">
+        <h4 data-i18n="ft.product">Produkt</h4>
+        <a href="/" data-i18n="nav.home2">Home</a>
+        <a href="low-voltage-bms.html" data-i18n="nav.lv2">Low-Voltage BMS</a>
+        <a href="konfigurieren.html" data-i18n="cta.configure6">BMS konfigurieren</a>
+      </div>
+      <div class="ft-col">
+        <h4 data-i18n="ft.company">Unternehmen</h4>
+        <a href="vision-team.html" data-i18n="nav.vision2">Vision &amp; Team</a>
+        <a href="https://nice-channel-658.notion.site/Careers-at-Anori-Tech-3834b6f765ee809885d5fef8bb0c7580" target="_blank" rel="noopener"><span data-i18n="nav.career2">Karriere</span></a>
+      </div>
+      <div class="ft-col">
+        <h4 data-i18n="ft.resources">Ressourcen</h4>
+        <a href="/#faq" data-i18n="ft.faq">FAQ</a>
+        <a href="vision-team.html#presse" data-i18n="ft.press">Presse</a>
+      </div>
+      <div class="ft-col">
+        <h4 data-i18n="ft.contact">Kontakt</h4>
+        <a href="mailto:team@anoritech.com"><span>team@anoritech.com</span></a>
+        <a href="tel:+4915167011710"><span>+49 151 6701 1710</span></a>
+        <p>Luruper Hauptstraße 1<br>22547 Hamburg</p>
+      </div>
+      <div class="ft-col">
+        <h4 data-i18n="ft.legal">Rechtliches</h4>
+        <a href="impressum.html" data-i18n="ft.imprint">Impressum</a>
+        <a href="datenschutz.html" data-i18n="ft.privacy">Datenschutz</a>
+        <button type="button" data-consent-link onclick="window.anoriOpenConsent &amp;&amp; window.anoriOpenConsent()" data-i18n="ft.cookies">Cookie-Einstellungen</button>
+      </div>
+    </div>
+
+    <div class="ft-support">
+      <div class="ft-support-label" data-i18n="ft.supportedby">Unterstützt von</div>
+      <div class="ft-support-logos">
+        <a href="https://www.tum-venture-labs.de/" target="_blank" rel="noopener"><img src="assets/logos/tum-venture-labs.png" alt="TUM Venture Labs, Battery Startup Incubator (BaStI)" loading="lazy" width="1920" height="417" decoding="async"></a>
+        <a href="https://www.ifbhh.de/" target="_blank" rel="noopener"><img src="assets/logos/ifb-hamburg.png" alt="IFB Hamburg, InnoRampUp" loading="lazy" width="1423" height="515" decoding="async"></a>
+        <img src="assets/logos/qimp.png" alt="QIMP High Tech Inkubator" loading="lazy" width="1583" height="440" decoding="async" data-i18n-attr="alt:alt.qimp">
+      </div>
+    </div>
+
+    <div class="ft-bottom">
+      <div>&copy; <span data-year>2026</span> Anori Tech UG (haftungsbeschränkt)</div>
+      <div data-i18n="ft.madein">Entwickelt und getestet in Hamburg</div>
+    </div>
+  </div>
+</footer>
+
+<div id="consent" hidden role="dialog" aria-label="Cookie-Einstellungen" data-i18n-attr="aria-label:consent.aria">
+  <div class="wrap consent-inner">
+    <p class="consent-text" data-i18n="consent.text">Wir würden gern anonymisierte Nutzungsstatistiken erheben, um die Seite zu verbessern. Das ist freiwillig und lässt sich jederzeit widerrufen. Details in der <a href="datenschutz.html">Datenschutzerklärung</a>.</p>
+    <div class="consent-actions">
+      <button class="btn btn-sm" id="consent-accept" data-i18n="consent.accept">Einverstanden</button>
+      <button class="btn btn-sm btn-ghost-light" id="consent-decline" data-i18n="consent.decline">Nur notwendige</button>
+    </div>
+  </div>
+</div>
+
+<script src="assets/anori.js"></script>
+</body>
+</html>

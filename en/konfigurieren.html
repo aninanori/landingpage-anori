@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-i18n="kf2.meta.title">Configure your BMS | Anori Tech</title>
+<meta name="description" content="Tell us cell chemistry, system voltage and current. Straight to the founding team in Hamburg, no form and no sign-up." data-i18n-attr="content:kf2.meta.description">
+<link rel="canonical" href="https://anoritech.com/en/konfigurieren.html">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Anori Tech">
+<meta property="og:title" content="Configure your BMS | Anori Tech" data-i18n-attr="content:kf2.meta.ogtitle">
+<meta property="og:description" content="Tell us cell chemistry, system voltage and current. Straight to the founding team in Hamburg, no form and no sign-up." data-i18n-attr="content:kf2.meta.description">
+<meta property="og:url" content="https://anoritech.com/en/konfigurieren.html">
+<meta property="og:image" content="https://anoritech.com/assets/img/og-en-konfigurieren.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="An Anori engineer configuring a BMS at the test bench" data-i18n-attr="content:kf2.meta.ogalt">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://anoritech.com/assets/img/og-en-konfigurieren.jpg">
+<meta name="theme-color" content="#000029">
+<link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
+
+<link rel="icon" type="image/svg+xml" href="../assets/logos/anori-circlebox-blue500.svg">
+<link rel="preload" href="../assets/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/fonts/inter.css">
+<link rel="stylesheet" href="../assets/anori.css">
+<style>
+  /* Durchgehendes Raster wie auf low-voltage-bms.html */
+  body {
+    background-color: var(--offwhite);
+    background-image:
+      linear-gradient(to right, var(--lightblue) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--lightblue) 1px, transparent 1px);
+    background-size: var(--grid) var(--grid);
+  }
+
+  /* Headerbild: Foto aus dem Labor, feste Bildhoehe, sauber beschnitten */
+  .hero-visual .framed { aspect-ratio: 4/3; }
+  .hero-visual .framed img { object-position: 62% 50%; }
+
+  /* Kontaktkarten: lange Mailadresse darf umbrechen */
+  .contact-card .contact-value { word-break: break-word; }
+
+  /* Ohne JavaScript werden die Kontaktlinks nicht zusammengesetzt und haben
+     dann kein href. Dann kein Klick-Cursor vorgaukeln. */
+  a.btn:not([href]), a.contact-card:not([href]) { cursor: default; }
+
+  /* Reassurance-Zeile unter den Kontaktkarten: 4 -> 2 -> 1 Spalten,
+     Trennlinien werden je Breakpoint neu gesetzt, damit kein doppelter
+     Rahmen an den Aussenkanten entsteht. */
+  .assure {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+    border: 2px solid var(--navy); background: var(--white); margin-top: 24px;
+  }
+  .assure div {
+    padding: 20px 22px; font-size: .88rem; line-height: 1.5; color: var(--navy-80);
+    border-right: 2px solid var(--navy); display: flex; gap: 10px; align-items: flex-start;
+  }
+  .assure div:last-child { border-right: none; }
+  .assure svg { width: 17px; height: 17px; stroke: var(--navy); stroke-width: 2.6; fill: none; flex-shrink: 0; margin-top: 2px; }
+  @media (max-width: 1000px) {
+    .assure { grid-template-columns: repeat(2, 1fr); }
+    .assure div:nth-child(2n) { border-right: none; }
+    .assure div:nth-child(2n+1) { border-right: 2px solid var(--navy); }
+    .assure div:nth-child(-n+2) { border-bottom: 2px solid var(--navy); }
+  }
+  @media (max-width: 620px) {
+    .assure { grid-template-columns: 1fr; }
+    .assure div { border-right: none; border-bottom: 2px solid var(--navy); }
+    .assure div:last-child { border-bottom: none; }
+  }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "name": "Configure your BMS",
+  "url": "https://anoritech.com/en/konfigurieren.html",
+  "mainEntity": {
+    "@type": "Organization",
+    "@id": "https://anoritech.com/#organization",
+    "name": "Anori Tech UG (haftungsbeschränkt)",
+    "email": "team@anoritech.com",
+    "telephone": "+4915167011710",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Luruper Hauptstraße 1",
+      "postalCode": "22547",
+      "addressLocality": "Hamburg",
+      "addressCountry": "DE"
+    }
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": "https://anoritech.com/en/konfigurieren.html#webpage",
+  "url": "https://anoritech.com/en/konfigurieren.html",
+  "name": "Configure your BMS",
+  "isPartOf": {
+    "@id": "https://anoritech.com/#website"
+  },
+  "about": {
+    "@id": "https://anoritech.com/#organization"
+  },
+  "primaryImageOfPage": "https://anoritech.com/assets/img/og-en-konfigurieren.jpg",
+  "inLanguage": "en-GB",
+  "datePublished": "2026-08-14",
+  "dateModified": "2026-08-14"
+}
+</script>
+<link rel="alternate" hreflang="de" href="https://anoritech.com/konfigurieren.html">
+<link rel="alternate" hreflang="en" href="https://anoritech.com/en/konfigurieren.html">
+<link rel="alternate" hreflang="x-default" href="https://anoritech.com/konfigurieren.html">
+</head>
+<body>
+
+<a class="skip-link" href="#main" data-i18n="a11y.skip">Skip to content</a>
+
+<div class="nav-backdrop" id="nav-backdrop"></div>
+
+<nav id="nav-menu" aria-label="Main navigation" data-i18n-attr="aria-label:nav.aria.main">
+  <button class="nav-close" aria-label="Close menu" data-i18n-attr="aria-label:nav.aria.close">&times;</button>
+  <div class="nav-label" data-i18n="nav.label">Menu</div>
+  <a class="nav-link" href="index.html" data-i18n="nav.home">Home</a>
+  <a class="nav-link" href="low-voltage-bms.html" data-i18n="nav.lv">Low-Voltage BMS</a>
+  <a class="nav-link" href="vision-team.html" data-i18n="nav.vision">Vision &amp; Team</a>
+  <a class="nav-link" href="https://nice-channel-658.notion.site/Careers-at-Anori-Tech-3834b6f765ee809885d5fef8bb0c7580" target="_blank" rel="noopener"><span data-i18n="nav.career">Careers</span></a>
+  <div class="nav-cta"><a class="btn" href="konfigurieren.html" data-i18n="cta.configure">Configure your BMS</a></div>
+  <div class="nav-meta">
+    <a href="mailto:team@anoritech.com"><span>team@anoritech.com</span></a>
+    <a href="tel:+4915167011710"><span>+49 151 6701 1710</span></a>
+  </div>
+</nav>
+
+<header id="hdr">
+  <div class="wrap hdr-inner">
+    <a class="hdr-logo" href="index.html" aria-label="Anori Tech, to the homepage" data-i18n-attr="aria-label:a11y.logohome">
+      <img class="logo-dark" src="../assets/logos/anori-black.svg" alt="Anori Tech" width="130" height="30" loading="eager" decoding="async">
+      <img class="logo-light" src="../assets/logos/anori-white.svg" alt="Anori Tech" width="130" height="30" loading="eager" decoding="async">
+    </a>
+    <div class="hdr-right">
+      <a class="btn btn-sm" href="konfigurieren.html" data-i18n="cta.configure2">Configure your BMS</a>
+      <a class="lang-btn" href="../konfigurieren.html" hreflang="de" aria-label="Auf Deutsch umschalten">DE</a>
+      <button class="burger-btn" id="burger-btn" aria-label="Open menu" data-i18n-attr="aria-label:nav.aria.open" aria-expanded="false" aria-controls="nav-menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ══════════ 1 · HERO: sofort klar, wie es weitergeht ══════════ -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow" data-i18n="kf2.eyebrow">Your path to a BMS</span>
+        <h1 data-i18n="kf2.h1">Configure your BMS</h1>
+        <p class="lead" data-i18n="kf2.lead">The configurator is still being built. Until it is live, we configure your BMS together with you, in person.</p>
+        <p style="margin-top:18px;max-width:52ch;" data-i18n="kf2.p">One email or one call with cell chemistry, system voltage, current and application is enough.</p>
+        <div class="hero-btns" style="margin-top:26px;">
+          <a href="mailto:team@anoritech.com?subject=BMS%20konfigurieren" class="btn"><span>team@anoritech.com</span></a>
+          <a href="tel:+4915167011710" class="btn btn-ghost"><span>+49 151 6701 1710</span></a>
+        </div>
+        <p class="small muted" data-i18n="kf2.hero.note">Straight to the founding team in Hamburg. No form, no sign-up, no sales funnel.</p>
+      </div>
+      <div class="hero-visual">
+        <div class="framed">
+          <img src="../assets/img/header-configurator.webp" alt="An Anori engineer configuring a BMS at the test bench in the Hamburg lab" width="1600" height="1032" fetchpriority="high" loading="eager" decoding="async" data-i18n-attr="alt:alt.header-configurator">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ 2 · KONTAKT: zwei Wege, gross und klickbar ══════════ -->
+  <section class="section grid-bg-light">
+    <div class="wrap">
+      <div class="section-head fi">
+        <span class="eyebrow" data-i18n="kf2.contact.eyebrow">Direct line</span>
+        <h2 data-i18n="kf2.contact.h2">Two ways to reach us.</h2>
+      </div>
+
+      <div class="g2 fi">
+        <a href="mailto:team@anoritech.com?subject=BMS%20konfigurieren" class="contact-card">
+          <div class="contact-label" data-i18n="kf2.mail.label">Write</div>
+          <div class="contact-value">team@anoritech.com</div>
+          <div class="contact-note" data-i18n="kf2.mail.note">Reply the same working day. If you already have a requirements list, just attach it.</div>
+        </a>
+        <a href="tel:+4915167011710" class="contact-card">
+          <div class="contact-label" data-i18n="kf2.phone.label">Call</div>
+          <div class="contact-value">+49 151 6701 1710</div>
+          <div class="contact-note" data-i18n="kf2.phone.note">You reach the founding team directly, no switchboard.</div>
+        </a>
+      </div>
+
+      <div class="assure fi">
+        <div>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+          <span data-i18n="kf2.assure.1">You talk to the people who build the BMS, from the first email on.</span>
+        </div>
+        <div>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+          <span data-i18n="kf2.assure.2">Quote within 24 hours, prototype in 10 days.</span>
+        </div>
+        <div>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+          <span data-i18n="kf2.assure.3">NDA on request, before you share any details.</span>
+        </div>
+        <div>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+          <span data-i18n="kf2.assure.4">Nothing to fill in and nothing to sign up for.</span>
+        </div>
+      </div>
+
+      <p style="margin-top:32px;" class="fi"><a class="link-arrow" href="low-voltage-bms.html"><span data-i18n="kf2.back">See the technical data of the Low-Voltage BMS</span> <span aria-hidden="true">&rarr;</span></a></p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="ft-top">
+      <div class="ft-brand">
+        <img class="ft-logo" src="../assets/logos/anori-white.svg" alt="Anori Tech" width="120" height="26" loading="lazy" decoding="async">
+        <p class="ft-tagline" data-i18n="ft.tagline">The modular, configurable BMS from Hamburg. Delivered in days, not months.</p>
+        <a class="ft-social" href="https://www.linkedin.com/company/anori-tech/" target="_blank" rel="noopener" aria-label="Anori Tech on LinkedIn" data-i18n-attr="aria-label:alt.linkedin-anori">
+          <img src="../assets/logos/linkedin.png" alt="Anori Tech on LinkedIn" width="26" height="26" loading="lazy" decoding="async" data-i18n-attr="alt:alt.linkedin-anori">
+        </a>
+      </div>
+    </div>
+
+    <div class="ft-cols">
+      <div class="ft-col">
+        <h4 data-i18n="ft.product">Product</h4>
+        <a href="index.html" data-i18n="nav.home2">Home</a>
+        <a href="low-voltage-bms.html" data-i18n="nav.lv2">Low-Voltage BMS</a>
+        <a href="konfigurieren.html" data-i18n="cta.configure6">Configure your BMS</a>
+      </div>
+      <div class="ft-col">
+        <h4 data-i18n="ft.company">Company</h4>
+        <a href="vision-team.html" data-i18n="nav.vision2">Vision &amp; Team</a>
+        <a href="https://nice-channel-658.notion.site/Careers-at-Anori-Tech-3834b6f765ee809885d5fef8bb0c7580" target="_blank" rel="noopener"><span data-i18n="nav.career2">Careers</span></a>
+      </div>
+      <div class="ft-col">
+        <h4 data-i18n="ft.resources">Resources</h4>
+        <a href="index.html#faq" data-i18n="ft.faq">FAQ</a>
+        <a href="vision-team.html#presse" data-i18n="ft.press">Press</a>
+      </div>
+      <div class="ft-col">
+        <h4 data-i18n="ft.contact">Contact</h4>
+        <a href="mailto:team@anoritech.com"><span>team@anoritech.com</span></a>
+        <a href="tel:+4915167011710"><span>+49 151 6701 1710</span></a>
+        <p>Luruper Hauptstraße 1<br>22547 Hamburg</p>
+      </div>
+      <div class="ft-col">
+        <h4 data-i18n="ft.legal">Legal</h4>
+        <a href="../impressum.html" data-i18n="ft.imprint">Imprint</a>
+        <a href="../datenschutz.html" data-i18n="ft.privacy">Privacy policy</a>
+        <button type="button" data-consent-link onclick="window.anoriOpenConsent &amp;&amp; window.anoriOpenConsent()" data-i18n="ft.cookies">Cookie settings</button>
+      </div>
+    </div>
+
+    <div class="ft-support">
+      <div class="ft-support-label" data-i18n="ft.supportedby">Supported by</div>
+      <div class="ft-support-logos">
+        <a href="https://www.tum-venture-labs.de/" target="_blank" rel="noopener"><img src="../assets/logos/tum-venture-labs.png" alt="TUM Venture Labs, Battery Startup Incubator (BaStI)" loading="lazy" width="1920" height="417" decoding="async"></a>
+        <a href="https://www.ifbhh.de/" target="_blank" rel="noopener"><img src="../assets/logos/ifb-hamburg.png" alt="IFB Hamburg, InnoRampUp" loading="lazy" width="1423" height="515" decoding="async"></a>
+        <img src="../assets/logos/qimp.png" alt="QIMP high-tech incubator" loading="lazy" width="1583" height="440" decoding="async" data-i18n-attr="alt:alt.qimp">
+      </div>
+    </div>
+
+    <div class="ft-bottom">
+      <div>&copy; <span data-year>2026</span> Anori Tech UG (haftungsbeschränkt)</div>
+      <div data-i18n="ft.madein">Built and tested in Hamburg</div>
+    </div>
+  </div>
+</footer>
+
+<div id="consent" hidden role="dialog" aria-label="Cookie settings" data-i18n-attr="aria-label:consent.aria">
+  <div class="wrap consent-inner">
+    <p class="consent-text" data-i18n="consent.text">We would like to collect anonymised usage statistics to improve this site. This is voluntary and can be withdrawn at any time. Details in our <a href="/datenschutz.html">privacy policy</a>.</p>
+    <div class="consent-actions">
+      <button class="btn btn-sm" id="consent-accept" data-i18n="consent.accept">Accept</button>
+      <button class="btn btn-sm btn-ghost-light" id="consent-decline" data-i18n="consent.decline">Essential only</button>
+    </div>
+  </div>
+</div>
+
+<script src="../assets/anori.js"></script>
+</body>
+</html>
