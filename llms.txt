@@ -2,7 +2,7 @@
 
 > Anori Tech ist eine software-definierte BMS-Plattform aus Hamburg. Batteriepack-Hersteller konfigurieren ihr Batteriemanagementsystem, statt es zu entwickeln, und erhalten ein passgenaues, zertifizierungsfähiges BMS in Tagen statt Monaten.
 
-Anori Tech UG (haftungsbeschränkt) wurde am 28.11.2025 in Hamburg gegründet (HRB 195802) und wird von drei Gründerinnen und Gründern in Vollzeit geführt. Zum Team gehört außerdem ein Embedded Rust Developer. Das Unternehmen entwickelt, konfiguriert und liefert Battery Management Systems (BMS) für Batteriepack-Hersteller und Systemintegratoren, mit heutigem Fokus auf dem Niedervolt-Segment.
+Anori Tech wurde am 28.11.2025 in Hamburg als UG gegründet und firmiert seit dem 21.10.2026 als Anori Tech GmbH (Amtsgericht Hamburg, HRB 195802). Die drei Gründerinnen und Gründer arbeiten in Vollzeit und sind gemeinsam Geschäftsführer. Sitz ist Luruper Hauptstraße 1, 22547 Hamburg. Zum Team gehört außerdem ein Embedded Rust Developer. Das Unternehmen entwickelt, konfiguriert und liefert Battery Management Systems (BMS) für Batteriepack-Hersteller und Systemintegratoren, mit heutigem Fokus auf dem Niedervolt-Segment.
 
 ## Was Anori Tech anders macht
 
